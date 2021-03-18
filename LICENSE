@@ -1,0 +1,56 @@
+Freshchat SDK License Agreement
+————————————————————————————
+This Freshchat SDK License Agreement (“Agreement”) governs the use of Freshchat’s SDK, source codes, materials and the accompanying documentation (together, “Freshchat SDK”) and Your relationship between Freshworks, Inc. (and where applicable, its successors and assigns) and its Affiliates (together, “Freshworks”)
+By either downloading or using the Freshchat SDK, You represent on behalf of Yourself and, if applicable, others (together, “You” or “Your”) that You agree to the terms of this Agreement. If You do not agree to all of the terms herein, do not download or use the Freshchat SDK.
+
+Grant of Licenses
+————————————————————————————
+Use of Freshchat SDK: Conditioned upon Your compliance with this Agreement, Freshworks hereby grants You a limited, worldwide, non-transferable, non-exclusive, non-commercial license to use the Freshchat SDK solely for the purpose of developing, testing, operating, and distributing along with Your Application, the mobile customer support and engagement platform provided by Freshworks called Freshchat. Application herein shall have the same meaning as the Freshchat Terms of Service.
+Trademark Licenses: Freshchat and Freshworks’s other product and service names, and logos used or displayed, as a part of the Freshchat SDK, or on the Service or Websites are registered or unregistered trademarks of Freshworks (collectively, “Marks”), and You may only use such Marks to identify You as a user of Freshchat; provided You do not attempt, now or in the future, to claim any rights in the Marks, degrade the distinctiveness of the Marks, or use the Marks to disparage or misrepresent Freshworks, its services or products. Your use of third party service names or logos will be governed by their licenses only.
+
+Restrictions on use of Freshchat SDK
+————————————————————————————
+Except as permitted in writing, You agree not to (a) modify, adapt, alter, translate or otherwise attempt to gain unauthorized access to Freshchat or related systems or networks; (b) falsely imply any sponsorship or association with Us; (c) use the Freshchat SDK in any manner that interferes with or disrupts the integrity or performance of the Freshchat and its components; (d) attempt to decipher, decompile, reverse engineer, disassemble, reproduce, or modify the source code or underlying applications provided in the Freshchat SDK; (e) rent, lease, or otherwise commercially distribute or offer to distribute, the Freshchat SDK; or (f) try to use, or use the Freshchat SDK in violation of this Agreement.
+Intellectual Property Rights
+Ownership: Except for the license granted to You, all rights, title and interest in and to all Our patents, inventions, copyrights, trademarks, domain names, trade secrets, know-how and any other intellectual property and/or proprietary rights in or related to the Freshchat SDK and any part of it (collectively, “Intellectual Property Rights”) shall belong to and remain exclusively with Freshworks. Freshworks acknowledges that You own the applications You develop using the Freshchat SDK.
+Feedback and Recommendations: Freshworks shall have a royalty-free, worldwide, transferable, sub-licensable, irrevocable and perpetual license to incorporate or otherwise use any suggestions, enhancement requests, recommendations or other feedback We receive from You with respect to Freshchat or Freshchat SDK.
+Copyright Notices: You agree that You will maintain and not remove, obscure or alter any proprietary rights notices (including copyright and trademark notices) that may be affixed to or contained within or as a part of the Freshchat SDK.
+Reservation of Rights: All rights not expressly provided to You herein are reserved.
+
+Updates and Support
+————————————————————————————
+Freshworks may provide upgrades, patches, enhancements, or fixes for the Freshchat SDK (“Updates”) which shall be subject to this Agreement. Freshworks may also provide You with reasonable support to assist You in integrating Freshchat with Your Application (“Support”). Unless otherwise specified, no fees shall be payable by You for such Support.
+
+Disclaimer of Warranties
+————————————————————————————
+
+THE Freshchat SDK IS PROVIDED ON AN “AS IS” BASIS, WITHOUT ANY WARRANTIES OF ANY KIND TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, AND Freshworks EXPRESSLY DISCLAIMS ANY AND ALL CONDITIONS, REPRESENTATIONS, WARRANTIES OR OTHER TERMS, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OF MERCHANTABILITY, TITLE, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT. YOUR USE OF THE Freshchat SDK IS AT YOUR OWN RISK AND YOU ARE SOLELY RESPONSIBLE FOR ANY DAMAGE TO YOUR COMPUTER SYSTEM OR OTHER DEVICE OR LOSS OF DATA THAT RESULTS FROM SUCH USE.
+Limitation of Liability
+TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT WILL FRESHWORKS, ITS AFFILIATES, OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, SUPPLIERS OR LICENSORS BE LIABLE TO ANY PERSON FOR ANY INDIRECT, INCIDENTAL, SPECIAL, PUNITIVE, COVER OR CONSEQUENTIAL DAMAGES (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOST PROFITS, REVENUE, SALES, GOODWILL, USE OR CONTENT, IMPACT ON BUSINESS, BUSINESS INTERRUPTION, LOSS OF ANTICIPATED SAVINGS, LOSS OF BUSINESS OPPORTUNITY) HOWEVER CAUSED, UNDER ANY THEORY OF LIABILITY, INCLUDING, WITHOUT LIMITATION, CONTRACT, TORT, WARRANTY, BREACH OF STATUTORY DUTY,NEGLIGENCE OR OTHERWISE, EVEN IF FRESHWORKS HAS BEEN ADVISED AS TO THE POSSIBILITY OF SUCH DAMAGES OR COULD HAVE FORESEEN SUCH DAMAGES. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE AGGREGATE LIABILITY OF FRESHWORKS AND ITS AFFILIATES, OFFICERS, EMPLOYEES, AGENTS, SUPPLIERS AND LICENSORS, RELATING TO THE SERVICE WILL BE LIMITED TO AN AMOUNT EQUAL TO USD ONE THOUSAND, PRIOR TO THE FIRST EVENT OR OCCURRENCE GIVING RISE TO SUCH LIABILITY.
+
+Indemnification
+————————————————————————————
+You will indemnify and hold Freshworks harmless against any claim brought by a third party against the Freshworks, and its employees, officers, directors and agents arising from or related to use of the Freshchat SDK by You in breach of this Agreement provided that Freshworks promptly notifies You of the threat or notice of such a claim.
+
+Termination
+————————————————————————————
+You may terminate this Agreement at any time by ceasing to use the Freshchat SDK and deleting, destroying or removing from Your systems, hard drives, networks, and other storage media all copies of the Freshchat SDK. We may terminate this Agreement by written notice to You or if You are in breach of any provisions of this Agreement.
+
+Export Controls
+————————————————————————————
+You acknowledge and agree that You will not import, export, or re-export, directly or indirectly, the Freshchat SDK or any part thereof (including, without limitation, any related information) to any country in violation of the laws and regulations of any applicable jurisdiction. This restriction expressly includes, without limitation, the export regulations of the United States, and the import and export restrictions of the various European countries. You further agree to defend, indemnify and hold harmless Freshworks, its affiliates and their respective directors, officers, employees, agents and representatives from any losses, costs, claims or other liabilities arising out of Your breach of this Section.
+
+Miscellaneous Provisions
+————————————————————————————
+Severability and Waiver: If any provision in this Agreement is held by a court of competent jurisdiction to be unenforceable, such provision shall be interpreted so as to best accomplish the original provision to the fullest extent permitted by applicable law, and the remaining provisions of this Agreement shall remain in effect. The failure or delay of Freshworks to exercise any right herein shall not be deemed a waiver of any right hereunder.
+
+Survival: The provisions pertaining to Ownership of Intellectual Property Rights Disclaimer of Warranties, Limitation of Liability, Indemnification, Survival and Governing Law and Dispute Resolution shall survive any termination of this Agreement.  Such termination shall not limit Your or Freshworks’s liability for obligations accrued as of or prior to such termination or for any breach of this Agreement.
+
+Notice: You agree that We may send You communications or data regarding the Freshchat SDK, including but not limited to: (a) notices about Your use of the Freshchat SDK, including any notices concerning violations of use; (b) updates; and (c) any other related issues, via electronic mail You have provided us while creating Your Account with Us. Our address for a notice to us in writing by nationally recognized overnight delivery service (“Courier”) or US Mail is:  Freshworks, Inc., 1250 Bayhill Drive, Suite 315, San Bruno, CA 94066 with a CC to legal@freshworks.com by electronic mail.  All notices shall be deemed to have been given immediately upon delivery by electronic mail, or if otherwise delivered upon receipt or, if earlier, two (2) business days after being deposited in the mail or with a Courier as specified above. “Your Account” mentioned herein shall have the same meaning specified in the Freshchat Terms of Service.
+
+Governing Law and Dispute Resolution: This Agreement shall be governed by the laws of the State of California without reference to conflict of laws principles. You hereby expressly agree to submit to the exclusive personal jurisdiction of the federal and state courts of the State of California, San Francisco County, for the purpose of resolving any dispute relating to this Agreement or access to or use of the Freshchat SDK by You.
+
+Any dispute, claim or controversy arising out of or relating to this Agreement or the breach, termination, enforcement, interpretation or validity thereof, including the determination of the scope or applicability of the terms herein to arbitrate, shall be determined by arbitration in San Francisco, California before three arbitrators. The arbitration shall be administered by JAMS pursuant to its Comprehensive Arbitration Rules and Procedures and in accordance with the Expedited Procedures in those Rules. Judgment on the Award may be entered in any court having jurisdiction. Any arbitration under this Agreement shall take place on an individual basis. Class action and class arbitrations are not permitted. You understand that by agreeing to the terms of this Agreement, You waive Your right to participate in class actions. This clause shall not preclude parties from seeking provisional remedies in aid of arbitration from a court of appropriate jurisdiction.
+
+
+
