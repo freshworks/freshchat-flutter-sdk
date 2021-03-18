@@ -1,0 +1,32 @@
+name: freshchat_sdk
+description: Freshchat is a modern messaging software for sales and customer engagement teams. freshchat_sdk (BETA) will help you integrate chat support in your mobile apps.
+
+# Whenever this version is updated, it must also be updated in Freshchat::getSdkVersion()
+version: 0.2.0
+homepage: https://freshchat.com
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.freshchat.consumer.sdk.flutter
+        pluginClass: FreshchatSdkPlugin
+      ios:
+        pluginClass: FreshchatSdkPlugin
+
+assets:
+  - pubspec.yaml
