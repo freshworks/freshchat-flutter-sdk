@@ -27,6 +27,15 @@ NSNotificationCenter *center;
         freshchatConfig.cameraCaptureEnabled = [call.arguments[@"cameraCaptureEnabled"]boolValue];
         freshchatConfig.gallerySelectionEnabled = [call.arguments[@"gallerySelectionEnabled"]boolValue];
         freshchatConfig.eventsUploadEnabled = [call.arguments[@"userEventsTrackingEnabled"]boolValue];
+        NSString* stringsBundle = call.arguments[@"stringsBundle"];
+        NSString* themeName = call.arguments[@"themeName"];
+        if(![themeName isEqual:[NSNull null]]) {
+            freshchatConfig.themeName = themeName;
+        }
+        
+        if(![stringsBundle isEqual:[NSNull null]]) {
+            freshchatConfig.stringsBundle = stringsBundle;
+        }
         [[Freshchat sharedInstance]initWithConfig:freshchatConfig];
     } @catch (NSException *exception) {
         NSLog(@"initialize SDK CRASH: %@ %@", exception.name, exception.reason);

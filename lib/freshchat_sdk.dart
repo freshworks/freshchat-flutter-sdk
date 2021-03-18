@@ -113,9 +113,9 @@ extension getImportanceValue on Importance {
 const FRESHCHAT_USER_RESTORE_ID_GENERATED =
     "FRESHCHAT_USER_RESTORE_ID_GENERATED";
 const FRESHCHAT_EVENTS = "FRESHCHAT_EVENTS";
-const FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED = "FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED";
+const FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED =
+    "FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED";
 const ACTION_OPEN_LINKS = "ACTION_OPEN_LINKS";
-
 
 class Freshchat {
   static const MethodChannel _channel = const MethodChannel('freshchat_sdk');
@@ -125,7 +125,9 @@ class Freshchat {
       bool teamMemberInfoVisible = true,
       bool cameraCaptureEnabled = true,
       bool gallerySelectionEnabled = true,
-      bool userEventsTrackingEnabled = true}) async {
+      bool userEventsTrackingEnabled = true,
+      String stringsBundle,
+      String themeName}) async {
     await _channel.invokeMethod('init', <String, dynamic>{
       'appId': appId,
       'appKey': appKey,
@@ -134,7 +136,9 @@ class Freshchat {
       'teamMemberInfoVisible': teamMemberInfoVisible,
       'cameraCaptureEnabled': cameraCaptureEnabled,
       'gallerySelectionEnabled': gallerySelectionEnabled,
-      'userEventsTrackingEnabled': userEventsTrackingEnabled
+      'userEventsTrackingEnabled': userEventsTrackingEnabled,
+      'stringsBundle': stringsBundle,
+      'themeName': themeName
     });
   }
 
@@ -178,7 +182,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.2.0-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.3.0-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
@@ -403,10 +407,10 @@ class Freshchat {
 
   static Stream get onRegisterForOpeningLink {
     linkHandlingStreamController.onCancel = () {
-      registerForEvent(ACTION_OPEN_LINKS,false);
+      registerForEvent(ACTION_OPEN_LINKS, false);
     };
     linkHandlingStreamController.onListen = () {
-      registerForEvent(ACTION_OPEN_LINKS,true);
+      registerForEvent(ACTION_OPEN_LINKS, true);
     };
     return linkHandlingStreamController.stream;
   }
