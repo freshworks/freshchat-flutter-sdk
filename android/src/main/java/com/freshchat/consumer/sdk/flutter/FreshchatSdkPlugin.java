@@ -514,6 +514,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
 
                 case "identifyUser":
                     identifyUser(call);
+                    result.success(null);
                     break;
 
                 case "registerForEvent":

@@ -1,5 +1,11 @@
 #import "FreshchatSdkPlugin.h"
 
+#if __has_include("FreshchatSDK.h")
+#import "FreshchatSDK.h"
+#else
+#import "FreshchatSDK/FreshchatSDK.h"
+#endif
+
 @implementation FreshchatSdkPlugin
 
 FlutterMethodChannel* channel;
@@ -32,7 +38,7 @@ NSNotificationCenter *center;
         if(![themeName isEqual:[NSNull null]]) {
             freshchatConfig.themeName = themeName;
         }
-        
+
         if(![stringsBundle isEqual:[NSNull null]]) {
             freshchatConfig.stringsBundle = stringsBundle;
         }
@@ -377,6 +383,7 @@ NSNotificationCenter *center;
         result([instance getUserIdTokenStatus]);
     }else if([@"identifyUser" isEqualToString:call.method]){
         [instance identifyUser:call];
+        result(nil);
     }else if([@"setNotificationConfig" isEqualToString:call.method]){
         [instance setNotificationConfig];
     }else if([@"setPushRegistrationToken" isEqualToString:call.method]){
