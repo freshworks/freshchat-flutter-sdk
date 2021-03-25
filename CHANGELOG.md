@@ -1,3 +1,12 @@
+## 0.4.0 (25/03/2021)
+
+### Enhancements
+* Upgraded Freshchat Android SDK version to 4.3.3
+* Upgraded Freshchat iOS SDK version to 4.1.6
+
+### Bug Fix
+* Handled null parameters in FreshchatUser object.
+
 ## 0.3.1 (18/03/2021)
 
 * Added missing changelogs

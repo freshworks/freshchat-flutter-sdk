@@ -182,7 +182,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.3.1-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.4.0-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
@@ -294,8 +294,8 @@ class Freshchat {
     }
   }
 
-  static Future identifyUser({String externalId, String restoreId}) async {
-    await _channel.invokeMethod(
+  static void identifyUser({String externalId, String restoreId}) {
+    _channel.invokeMethod(
       'identifyUser',
       <String, String>{
         'externalId': externalId ?? "",

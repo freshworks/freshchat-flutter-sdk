@@ -89,11 +89,21 @@ NSNotificationCenter *center;
 -(void)setUser:(FlutterMethodCall *) call{
     @try {
         FreshchatUser *user = [FreshchatUser sharedInstance];
-        user.firstName = call.arguments[@"firstName"];;
-        user.lastName = call.arguments[@"lastName"];
-        user.email = call.arguments[@"email"];;
-        user.phoneCountryCode = call.arguments[@"phoneCountryCode"];;
-        user.phoneNumber = call.arguments[@"phoneNumber"];;
+        if(![call.arguments[@"firstName"] isEqual:[NSNull null]]){
+            user.firstName = call.arguments[@"firstName"];
+        }
+        if(![call.arguments[@"lastName"] isEqual:[NSNull null]]){
+            user.lastName = call.arguments[@"lastName"];
+        }
+        if(![call.arguments[@"email"] isEqual:[NSNull null]]){
+            user.email = call.arguments[@"email"];
+        }
+        if(![call.arguments[@"phoneCountryCode"] isEqual:[NSNull null]]){
+            user.phoneCountryCode = call.arguments[@"phoneCountryCode"];
+        }
+        if(![call.arguments[@"phoneNumber"] isEqual:[NSNull null]]){
+            user.phoneNumber = call.arguments[@"phoneNumber"];
+        }
         [[Freshchat sharedInstance] setUser:user];
     } @catch (NSException *exception) {
         NSLog(@"Error on set user details: %@ %@", exception.name, exception.reason);
