@@ -32,10 +32,12 @@ import com.freshchat.consumer.sdk.Freshchat;
 import com.freshchat.consumer.sdk.FreshchatMessage;
 import com.freshchat.consumer.sdk.FreshchatNotificationConfig;
 import com.freshchat.consumer.sdk.FreshchatUser;
+import com.freshchat.consumer.sdk.FreshchatWebViewListener;
 import com.freshchat.consumer.sdk.JwtTokenStatus;
 import com.freshchat.consumer.sdk.LinkHandler;
 import com.freshchat.consumer.sdk.UnreadCountCallback;
 
+import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -55,11 +57,13 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
     private FreshchatSDKBroadcastReceiver restoreIdUpdatesReceiver;
     private FreshchatSDKBroadcastReceiver userActionsReceiver;
     private FreshchatSDKBroadcastReceiver messageCountUpdatesReceiver;
+    private static final String LOG_TAG = "FRESHCHAT_FLUTTER";
     private static final String ERROR_TAG = "FRESHCHAT_ERROR";
     private static final String FRESHCHAT_USER_RESTORE_ID_GENERATED = "FRESHCHAT_USER_RESTORE_ID_GENERATED";
     private static final String FRESHCHAT_EVENTS = "FRESHCHAT_EVENTS";
     private static final String FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED = "FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED";
     private static final String ACTION_OPEN_LINKS = "ACTION_OPEN_LINKS";
+    private static final String ACTION_LOCALE_CHANGED_BY_WEBVIEW = "ACTION_LOCALE_CHANGED_BY_WEBVIEW";
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -372,6 +376,9 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
             case ACTION_OPEN_LINKS:
                 registerForOpeningLink(shouldRegister);
                 break;
+            case ACTION_LOCALE_CHANGED_BY_WEBVIEW:
+                registerForLocaleChangedByWebview(shouldRegister);
+                break;
             default:
                 Log.e(ERROR_TAG, "Invalid event name passed for register: " + eventName);
         }
@@ -436,6 +443,39 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }
 
+
+    private FreshchatWebViewListener webviewListener = new FreshchatWebViewListener() {
+        @Override
+        public void onLocaleChangedByWebView(@NonNull WeakReference<Context> activityContext) {
+            Map map = new HashMap<>();
+            channel.invokeMethod(ACTION_LOCALE_CHANGED_BY_WEBVIEW, map);
+        }
+    };
+
+    public void registerForLocaleChangedByWebview(boolean register) {
+        Log.i(LOG_TAG, "registerForLocaleChangedByWebview: " + register);
+        if (register) {
+            Freshchat.getInstance(context).setWebviewListener(webviewListener);
+        } else {
+            Freshchat.getInstance(context).setWebviewListener(null);
+        }
+    }
+
+    public void openFreshchatDeeplink(MethodCall call) {
+        String link = call.argument("link");
+        Log.i(LOG_TAG, "openFreshchatDeeplink: " + link);
+        Freshchat.openFreshchatDeeplink(context, link);
+    }
+
+    public void linkifyWithPattern(MethodCall call){
+        String regex = call.argument("regex");
+        String defaultScheme = call.argument("defaultScheme");
+        Freshchat.getInstance(context).linkifyWithPattern(regex,defaultScheme);
+    }
+
+    public void notifyAppLocaleChange(){
+        Freshchat.notifyAppLocaleChange(context);
+    }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
@@ -534,6 +574,18 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
 
                 case "handlePushNotification":
                     handlePushNotification(call);
+                    break;
+
+                case "openFreshchatDeeplink":
+                    openFreshchatDeeplink(call);
+                    break;
+
+                case "linkifyWithPattern":
+                    linkifyWithPattern(call);
+                    break;
+
+                case "notifyAppLocaleChange":
+                    notifyAppLocaleChange();
                     break;
 
                 default:

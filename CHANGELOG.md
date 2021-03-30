@@ -1,3 +1,15 @@
+## 0.5.0 (30/03/2021)
+
+### Enhancements
+* Android - Open Freshchat deeplink
+* Android - Register for webview listener
+* Android - Linkify for custom patterns
+* Android - Runtime locale change support
+* iOS - Config to enable/disable logging
+
+### Bug Fix
+* iOS - Made changes to support transitive dependencies
+
 ## 0.4.0 (25/03/2021)
 
 ### Enhancements
@@ -5,7 +17,7 @@
 * Upgraded Freshchat iOS SDK version to 4.1.6
 
 ### Bug Fix
-* Handled null parameters in FreshchatUser object.
+* Handled null parameters in FreshchatUser object
 
 ## 0.3.1 (18/03/2021)
 

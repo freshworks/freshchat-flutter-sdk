@@ -17,6 +17,7 @@ final StreamController restoreIdStreamController = StreamController();
 final StreamController freshchatEventStreamController = StreamController();
 final StreamController messageCountUpdatesStreamController = StreamController();
 final StreamController linkHandlingStreamController = StreamController();
+final StreamController webviewStreamController = StreamController();
 
 extension ParseToString on FaqFilterType {
   String toShortString() {
@@ -116,6 +117,7 @@ const FRESHCHAT_EVENTS = "FRESHCHAT_EVENTS";
 const FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED =
     "FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED";
 const ACTION_OPEN_LINKS = "ACTION_OPEN_LINKS";
+const ACTION_LOCALE_CHANGED_BY_WEBVIEW = "ACTION_LOCALE_CHANGED_BY_WEBVIEW";
 
 class Freshchat {
   static const MethodChannel _channel = const MethodChannel('freshchat_sdk');
@@ -127,7 +129,8 @@ class Freshchat {
       bool gallerySelectionEnabled = true,
       bool userEventsTrackingEnabled = true,
       String stringsBundle,
-      String themeName}) async {
+      String themeName,
+      bool errorLogsEnabled = true}) async {
     await _channel.invokeMethod('init', <String, dynamic>{
       'appId': appId,
       'appKey': appKey,
@@ -138,7 +141,8 @@ class Freshchat {
       'gallerySelectionEnabled': gallerySelectionEnabled,
       'userEventsTrackingEnabled': userEventsTrackingEnabled,
       'stringsBundle': stringsBundle,
-      'themeName': themeName
+      'themeName': themeName,
+      'errorLogsEnabled': errorLogsEnabled
     });
   }
 
@@ -182,7 +186,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.4.0-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.5.0-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
@@ -330,6 +334,10 @@ class Freshchat {
         Map url = methodCall.arguments;
         linkHandlingStreamController.add(url);
         break;
+      case ACTION_LOCALE_CHANGED_BY_WEBVIEW:
+        Map map = methodCall.arguments;
+        webviewStreamController.add(map);
+        break;
       default:
         print("No such method implementation");
     }
@@ -375,6 +383,21 @@ class Freshchat {
     });
   }
 
+  static void openFreshchatDeeplink(String link) {
+    _channel.invokeMethod("openFreshchatDeeplink", <String, String>{
+      'link': link,
+    });
+  }
+
+  static void linkifyWithPattern(String regex, String defaultScheme) {
+    _channel.invokeMethod("linkifyWithPattern",
+        <String, String>{'regex': regex, 'defaultScheme': defaultScheme});
+  }
+
+  static void notifyAppLocaleChange() {
+    _channel.invokeMethod("notifyAppLocaleChange");
+  }
+
   static Stream get onRestoreIdGenerated {
     restoreIdStreamController.onCancel = () {
       registerForEvent(FRESHCHAT_USER_RESTORE_ID_GENERATED, false);
@@ -413,5 +436,15 @@ class Freshchat {
       registerForEvent(ACTION_OPEN_LINKS, true);
     };
     return linkHandlingStreamController.stream;
+  }
+
+  static Stream get onLocaleChangedByWebView {
+    webviewStreamController.onCancel = () {
+      registerForEvent(ACTION_LOCALE_CHANGED_BY_WEBVIEW, false);
+    };
+    webviewStreamController.onListen = () {
+      registerForEvent(ACTION_LOCALE_CHANGED_BY_WEBVIEW, true);
+    };
+    return webviewStreamController.stream;
   }
 }

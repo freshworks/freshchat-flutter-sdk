@@ -1,4 +1,9 @@
 #import "FreshchatSdkPlugin.h"
+#if __has_include("FreshchatSDK.h")
+#import "FreshchatSDK.h"
+#else
+#import "FreshchatSDK/FreshchatSDK.h"
+#endif
 
 @implementation FreshchatSdkPlugin
 
@@ -27,6 +32,7 @@ NSNotificationCenter *center;
         freshchatConfig.cameraCaptureEnabled = [call.arguments[@"cameraCaptureEnabled"]boolValue];
         freshchatConfig.gallerySelectionEnabled = [call.arguments[@"gallerySelectionEnabled"]boolValue];
         freshchatConfig.eventsUploadEnabled = [call.arguments[@"userEventsTrackingEnabled"]boolValue];
+        freshchatConfig.errorLogsEnabled = [call.arguments[@"errorLogsEnabled"]boolValue];
         NSString* stringsBundle = call.arguments[@"stringsBundle"];
         NSString* themeName = call.arguments[@"themeName"];
         if(![themeName isEqual:[NSNull null]]) {
@@ -263,6 +269,9 @@ NSNotificationCenter *center;
         }else
         if([eventName isEqual:(@"ACTION_OPEN_LINKS")]){
             [instance registerForOpeningLink:YES];
+        }else
+        if([eventName isEqual:(@"ACTION_LOCALE_CHANGED_BY_WEBVIEW")]){
+            NSLog(@"ACTION_LOCALE_CHANGED_BY_WEBVIEW not supported in iOS");
         }
     }
     else{
@@ -277,6 +286,9 @@ NSNotificationCenter *center;
         }else
         if([eventName isEqual:(@"ACTION_OPEN_LINKS")]){
             [instance registerForOpeningLink:NO];
+        }else
+        if([eventName isEqual:(@"ACTION_LOCALE_CHANGED_BY_WEBVIEW")]){
+            NSLog(@"ACTION_LOCALE_CHANGED_BY_WEBVIEW not supported in iOS");
         }
     }
 }
@@ -349,6 +361,22 @@ NSNotificationCenter *center;
     }
 }
 
+- (UIViewController*) topMostController {
+    UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    while (topController.presentedViewController) {
+        topController = topController.presentedViewController;
+    }
+    
+    return topController;
+}
+
+-(void)openFreshchatDeeplink:(FlutterMethodCall *) call{
+    NSString* link = call.arguments[@"link"];
+    UIViewController *visibleVC = [instance topMostController];
+    [[Freshchat sharedInstance] openFreshchatDeeplink:link viewController:visibleVC];
+}
+
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if ([@"getSdkVersion" isEqualToString:call.method]) {
@@ -401,6 +429,12 @@ NSNotificationCenter *center;
         [instance handlePushNotification:call.arguments[@"pushPayload"]];
     }else if([@"registerForEvent" isEqualToString:call.method]){
         [instance registerForEvent:call];
+    }else if([@"openFreshchatDeeplink" isEqualToString:call.method]){
+        [instance registerForEvent:call];
+    }else if([@"linkifyWithPattern" isEqualToString:call.method]){
+        NSLog(@"Linkify not available for iOS");
+    }else if([@"notifyAppLocaleChange" isEqualToString:call.method]){
+        NSLog(@"notifyAppLocaleChange not available for iOS");
     }
     else{
         result(FlutterMethodNotImplemented);
