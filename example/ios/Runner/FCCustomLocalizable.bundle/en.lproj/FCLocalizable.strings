@@ -1,0 +1,137 @@
+/*
+    Localizable.strings
+    Freshchat
+
+    Copyright (c) 2015 Freshdesk. All rights reserved.
+    */
+
+    /* Solution Categories*/
+    "faq_title_text"="FAQs";
+    "faq_close_button_text"="Close";
+    "contact_us_button_text"="Message Us";
+    "faq_feature_not_enabled_text"="FAQ feature is disabled";
+
+    /* Article UpVote DownVote */
+    "article_vote_prompt_text"="Did we address your concerns?";
+    "article_vote_prompt_yes_button_text"="Yes";
+    "article_vote_prompt_no_button_text"="No";
+
+    /* Article Vote thank you prompt */
+    "thank_you_prompt_text"="Thanks for your feedback!";
+    "thank_you_prompt_contact_us_button_text"="Still looking for help? Talk to us";
+
+    /* Article Detail */
+    "offline_missing_content_text"="Please connect to the internet to view media content available on this article.";
+
+    /* No Internet Connectivity */
+    "offline_internet_message"="Uh-uh. No internet connection";
+
+    /*Channels*/
+    "channels_title_text"="Conversations";
+    "channels_close_button_text"="Close";
+    "channels_feature_not_enabled_text"="Conversation feature is disabled";
+
+    /*Restoring view*/
+    "restore_close_button_text"="Close";
+
+    /* Message UI */
+    "message_placeholder_text" = "Enter text";
+    "messages_close_button_text"="Close";
+    "send_button_text"="Send";
+    "messages_agent_label_text"="Support";
+    "default_action_button_text"="View";
+    "default_video_button_text"="Watch Video";
+    "default_file_button_text"="Open File";
+
+
+    "audio_message_title"="Audio message";
+    "picture_message_title"="Image";
+    "picture_message_upload_error"="Error loading image. Image not found";
+
+    "audio_recording"="Audio Recording";
+    "audio_recording_stopped"="Recording Stopped";
+    "audio_recording_permission_denied"="Permission missing. Please enable Microphone permission under Settings.";
+
+    "cancel_audio_recording_alert"="Are you sure you want to cancel recording?";
+
+    "message_unsent_title"="Your message was not sent";
+    "message_unsent_info_text"="We were unable to send your message(s) at this time. Check internet or try again later";
+    "server_error_info_text"="Problem sending message. Please try again later.";
+
+    /* Account delete messages for actions*/
+    "error_message_account_not_active_text" = "This section is no longer available";
+    "error_message_account_not_active_cancel" = "Cancel";
+
+    /* Posting audio message alerts */
+    "short_audio_alert_title" = "Your message is too short.";
+    "short_audio_alert_description_text" = "The audio recording is too short. Please try again";
+    "long_audio_alert_title" = "Too long don't you think?";
+    "long_audio_alert_description_text" = "Your audio message is more than 2 minutes long. Sure you want to send?";
+    "long_audio_alert_post_button_text" = "Send it";
+
+    /* Search View Place Holder */
+    "search_placeholder_text"="Search FAQs";
+    "search_empty_result_text"="Whoops! We couldn't find what you were looking for.";
+    "empty_channel_text" = "Oops, no messages here!";
+    "empty_faq_text" = "Sorry! There are no FAQs available";
+    "loading_channel_text" = "Loading Messages";
+    "restoring_channel_text" = "Restoring Messages";
+    "loading_faq_text" = "Loading FAQs";
+
+    /* Camera Unavailable alert */
+    "camera_unavailable_title"="Your camera is unavailable";
+    "camera_unavailable_description"="Oopsie! Your device doesn't have a camera or the camera is not available for use";
+    "camera_unavailable_ok_button_text"="OK";
+    "camera_permission_denied" ="Camera permissions is required to capture pictures";
+    "photo_library_permission_denied" ="Photo library permission is required access photos";
+    "camera_permission_alert_cancel" ="Cancel";
+    "photo_library_permission_alert_cancel" ="Cancel";
+
+    /* Picture attached*/
+    "pic_msg_attachment_close_btn"="Back";
+    "pic_msg_attachment_title_text"="Picture";
+
+    /*Image Attachment*/
+    "image_attachment_cancel_button_text"="Cancel";
+    "image_attachment_select_existing_image"="Upload from gallery";
+    "image_attachment_select_new_image"="Take a picture";
+
+
+    /*Notifications*/
+    "notification_message_default"="You've got a message!";
+
+    /* Customer Satisfaction Survey */
+
+    /* Yes No Prompt */
+    "chat_resolution_prompt_text"="Were all your concerns addressed? ";
+    "chat_resolution_prompt_yes_button_text"="Yes!";
+    "chat_resolution_prompt_no_button_text"="No";
+
+    "chat_resolution_survey_question_text"="";
+
+    /* Survey prompt */
+    "cust_sat_not_resolved_prompt"="How could we have helped you better?";
+    "cust_sat_user_comments_placeholder"="Additional feedback";
+    "cust_sat_submit_button_text"="Send";
+
+    /* Message time format */
+    "chat_message_time_today"="hh:mm a";
+    "chat_message_time_this_year_short"="MMM dd";
+    "chat_message_time_this_year_long"="MMM dd',' hh:mm a";
+    "chat_message_time_other_year"="MMM YYYY";
+
+    /* Typically replies */
+    "typically_replies_within_a_minute"="Typically replies within a minute";
+    "typically_replies_within_x_minutes"="Typically replies within";
+    "typically_replies_within_an_hour"="Typically replies within an hour";
+    "typically_replies_within_2_hours"="Typically replies within 2 hours";
+    "typically_replies_within_few_hours"="Typically replies within few hours";
+
+    "placeholder_minutes"="minutes";
+
+    /*Average replies */
+    "currently_replying_in_a_minute" = "Currently replying in a minute";
+    "currently_replying_in_x_minutes"="Currently replying in";
+    "currently_replying_in_an_hour"="Currently replying in an hour";
+    "currently_replying_in_2_hours"="Currently replying in 2 hours";
+    "currently_replying_in_few_hours"="Currently replying in few hours";
