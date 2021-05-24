@@ -13,11 +13,11 @@ enum JwtTokenStatus {
   TOKEN_EXPIRED
 }
 
-final StreamController restoreIdStreamController = StreamController();
-final StreamController freshchatEventStreamController = StreamController();
-final StreamController messageCountUpdatesStreamController = StreamController();
-final StreamController linkHandlingStreamController = StreamController();
-final StreamController webviewStreamController = StreamController();
+final StreamController restoreIdStreamController = StreamController.broadcast();
+final StreamController freshchatEventStreamController = StreamController.broadcast();
+final StreamController messageCountUpdatesStreamController = StreamController.broadcast();
+final StreamController linkHandlingStreamController = StreamController.broadcast();
+final StreamController webviewStreamController = StreamController.broadcast();
 
 extension ParseToString on FaqFilterType {
   String toShortString() {
@@ -186,7 +186,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.5.0-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.6.0-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 

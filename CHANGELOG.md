@@ -1,4 +1,9 @@
-## 0.5.0 (30/03/2021)
+## 0.6.0 (24/05/2021)
+
+### Bug Fix
+* Fixed "Stream has already been listened to" error
+
+## 0.5.0 (31/03/2021)
 
 ### Enhancements
 * Android - Open Freshchat deeplink
