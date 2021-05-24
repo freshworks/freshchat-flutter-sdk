@@ -55,8 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
      * This is the Firebase push notification server key for this sample app.
      * Please save this in your Freshchat account to test push notifications in Sample app.
      *
-     * Server Key:
-     * AAAAWQmY32o:APA91bF_X9S3rrfBLT5kUVaZ2uftEIpqALXu3z05SoTZhAikINhGmUsd62jQE374vgHLZyILA3lhsAxLJSQlivsZcK_yY_DAjdAQTesUpabs1_5XiRsonrWDm5envw24nQSPTDG81g1w
+     * Server key: Please refer support documentation for the server key of this sample app.
      *
      * Note: This is the push notification server key for sample app. You need to use your own server key for testing in your application
      */
