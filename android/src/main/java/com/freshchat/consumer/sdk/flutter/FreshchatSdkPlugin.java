@@ -156,7 +156,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         Freshchat.showConversations(context);
     }
 
-    public String getUserAlias() {
+    public String getFreshchatUserId() {
         return Freshchat.getInstance(context).getFreshchatUserId();
     }
 
@@ -496,8 +496,8 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
                     showConversations();
                     break;
 
-                case "getUserAlias":
-                    result.success(getUserAlias());
+                case "getFreshchatUserId":
+                    result.success(getFreshchatUserId());
                     break;
 
                 case "resetUser":

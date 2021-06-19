@@ -1,3 +1,12 @@
+## 0.7.0 (19/06/2021)
+
+### Enhancements
+* Upgraded Freshchat Android SDK version to 4.3.5
+* Upgraded Freshchat iOS SDK version to 4.1.8
+
+### Breaking Change
+* Changed getUserAlias method name to getFreshchatUserId
+
 ## 0.6.0 (24/05/2021)
 
 ### Bug Fix
