@@ -14,9 +14,12 @@ enum JwtTokenStatus {
 }
 
 final StreamController restoreIdStreamController = StreamController.broadcast();
-final StreamController freshchatEventStreamController = StreamController.broadcast();
-final StreamController messageCountUpdatesStreamController = StreamController.broadcast();
-final StreamController linkHandlingStreamController = StreamController.broadcast();
+final StreamController freshchatEventStreamController =
+    StreamController.broadcast();
+final StreamController messageCountUpdatesStreamController =
+    StreamController.broadcast();
+final StreamController linkHandlingStreamController =
+    StreamController.broadcast();
 final StreamController webviewStreamController = StreamController.broadcast();
 
 extension ParseToString on FaqFilterType {
@@ -122,6 +125,9 @@ const ACTION_LOCALE_CHANGED_BY_WEBVIEW = "ACTION_LOCALE_CHANGED_BY_WEBVIEW";
 class Freshchat {
   static const MethodChannel _channel = const MethodChannel('freshchat_sdk');
 
+  /// Initialize Freshchat SDK with the necessary configuration
+  ///
+  /// [appId], [appKey] and [domain] can be found in Mobile SDK settings page of your Freshchat account.
   static void init(String appId, String appKey, String domain,
       {bool responseExpectationEnabled = true,
       bool teamMemberInfoVisible = true,
@@ -146,15 +152,22 @@ class Freshchat {
     });
   }
 
-  static Future<String> get getUserAlias async {
-    final String userAlias = await _channel.invokeMethod('getUserAlias');
+  /// Get the current user's identifier from Freshchat
+  static Future<String> get getFreshchatUserId async {
+    final String userAlias = await _channel.invokeMethod('getFreshchatUserId');
     return userAlias;
   }
 
+  /// Resets the user stored by Freshchat SDK
+  ///
+  /// Should be used when user logs out of the application
   static void resetUser() async {
     await _channel.invokeMethod('resetUser');
   }
 
+  /// Sync any change to user information with Freshchat
+  ///
+  /// [user] is the FreshchatUser object which is constructed with user details
   static void setUser(FreshchatUser user) async {
     await _channel.invokeMethod('setUser', <String, String>{
       'firstName': user.getFirstName(),
@@ -165,6 +178,7 @@ class Freshchat {
     });
   }
 
+  /// Returns an instance of FreshchatUser object, pre-populated with current user information
   static Future<FreshchatUser> get getUser async {
     final Map userDetails = await _channel.invokeMethod('getUser');
     FreshchatUser user =
@@ -176,12 +190,14 @@ class Freshchat {
     return user;
   }
 
+  /// Sync a series of user meta information with Freshchat
   static void setUserProperties(Map propertyMap) async {
     await _channel.invokeMethod('setUserProperties', <String, Map>{
       'propertyMap': propertyMap,
     });
   }
 
+  /// Get the current Freshchat flutter SDK version as well as the corresponding native SDK version (Android or iOS)
   static Future<String> get getSdkVersion async {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
@@ -190,6 +206,7 @@ class Freshchat {
     return allSdkVersion;
   }
 
+  /// Displays the FAQ Categories Page (Category List Activity) from where users can view and search FAQs
   static void showFAQ(
       {String faqTitle,
       String contactUsTitle,
@@ -223,6 +240,7 @@ class Freshchat {
     }
   }
 
+  /// Track an user event with Freshchat
   static void trackEvent(String eventName, {Map properties}) async {
     await _channel.invokeMethod(
       'trackEvent',
@@ -230,12 +248,14 @@ class Freshchat {
     );
   }
 
+  /// Retrieve a count of unread messages across all unrestricted/public channels for the user asynchronously.
   static Future<Map> get getUnreadCountAsync async {
     final Map unreadCountStatus =
         await _channel.invokeMethod('getUnreadCountAsync');
     return unreadCountStatus;
   }
 
+  /// Displays list of Support Channels (Channel List Activity) through which users can converse with you
   static void showConversations(
       {String filteredViewTitle, List<String> tags}) async {
     if (filteredViewTitle == null && tags == null) {
@@ -248,6 +268,7 @@ class Freshchat {
     }
   }
 
+  /// Sync any change to user information, specified in JWT Token with Freshchat
   static void setUserWithIdToken(String token) async {
     await _channel.invokeMethod(
       'setUserWithIdToken',
@@ -257,6 +278,9 @@ class Freshchat {
     );
   }
 
+  /// Send a message on behalf of the user to a conversation channel tagged with the provided tag
+  ///
+  /// Pass the topic name in [tag] and the message to be sent in [message]
   static void sendMessage(String tag, String message) async {
     await _channel.invokeMethod(
       'sendMessage',
@@ -264,6 +288,7 @@ class Freshchat {
     );
   }
 
+  /// Restore an user base on reference_id present in the jwt token
   static void restoreUserWithIdToken(String token) async {
     await _channel.invokeMethod(
       'restoreUserWithIdToken',
@@ -273,6 +298,7 @@ class Freshchat {
     );
   }
 
+  /// Get the status of the jwt id token
   static Future<JwtTokenStatus> get getUserIdTokenStatus async {
     String tokenStatus = await _channel.invokeMethod(
       'getUserIdTokenStatus',
@@ -298,6 +324,7 @@ class Freshchat {
     }
   }
 
+  /// To identify an user in Freshchat with an unique identifier from your system and restore an user across devices/sessions/platforms based on an external identifier and restore id
   static void identifyUser({String externalId, String restoreId}) {
     _channel.invokeMethod(
       'identifyUser',
@@ -308,15 +335,16 @@ class Freshchat {
     );
   }
 
-  static void registerForEvent(String eventName, bool shouldRegister) {
-    _channel.setMethodCallHandler(wrapperMethodCallHandler);
+  static void _registerForEvent(String eventName, bool shouldRegister) {
+    _channel.setMethodCallHandler(_wrapperMethodCallHandler);
     _channel.invokeMethod('registerForEvent', <String, dynamic>{
       'eventName': eventName,
       'shouldRegister': shouldRegister
     });
   }
 
-  static Future<dynamic> wrapperMethodCallHandler(MethodCall methodCall) async {
+  static Future<dynamic> _wrapperMethodCallHandler(
+      MethodCall methodCall) async {
     switch (methodCall.method) {
       case FRESHCHAT_USER_RESTORE_ID_GENERATED:
         bool isRestoreIdGenerated = methodCall.arguments;
@@ -343,6 +371,7 @@ class Freshchat {
     }
   }
 
+  /// Accepts Notification configurations allowing you to configure all the notification related parameters (Android)
   static void setNotificationConfig(
       {Priority priority = Priority.PRIORITY_DEFAULT,
       Importance importance = Importance.IMPORTANCE_DEFAULT,
@@ -363,12 +392,14 @@ class Freshchat {
     );
   }
 
+  /// Allows you to configure the FCM Registration token for the user (Android)
   static void setPushRegistrationToken(String token) async {
     await _channel.invokeMethod('setPushRegistrationToken', <String, String>{
       'token': token,
     });
   }
 
+  /// Check if the notification received with the provided intent is a Freshchat notification or not (Android)
   static Future<bool> isFreshchatNotification(Map pushPayload) async {
     bool isFreshchatNotification =
         await _channel.invokeMethod("isFreshchatNotification", <String, Map>{
@@ -377,73 +408,87 @@ class Freshchat {
     return isFreshchatNotification;
   }
 
+  /// Process the notification information and display a notification to the user as appropriate (Android)
   static void handlePushNotification(Map pushPayload) async {
     await _channel.invokeMethod("handlePushNotification", <String, Map>{
       'pushPayload': pushPayload,
     });
   }
 
+  /// Open Freshchat deeplinks.
+  ///
+  /// This can be used to open specific channels and specific FAQs specified in the deeplink
   static void openFreshchatDeeplink(String link) {
     _channel.invokeMethod("openFreshchatDeeplink", <String, String>{
       'link': link,
     });
   }
 
+  /// Creates deep links in messages turning the matches into links based on the regex (Android)
+  ///
+  /// Internally uses {@link android.text.util.Linkify#addLinks(Spannable, Pattern, String)}
+  /// The given regex is converted into a pattern and passed to the addLinks method.
   static void linkifyWithPattern(String regex, String defaultScheme) {
     _channel.invokeMethod("linkifyWithPattern",
         <String, String>{'regex': regex, 'defaultScheme': defaultScheme});
   }
 
+  /// Notify any locale change that happens during runtime to Freshchat (Android)
   static void notifyAppLocaleChange() {
     _channel.invokeMethod("notifyAppLocaleChange");
   }
 
+  /// Stream which triggers a callback if the restoreID is generated for the user
   static Stream get onRestoreIdGenerated {
     restoreIdStreamController.onCancel = () {
-      registerForEvent(FRESHCHAT_USER_RESTORE_ID_GENERATED, false);
+      _registerForEvent(FRESHCHAT_USER_RESTORE_ID_GENERATED, false);
     };
     restoreIdStreamController.onListen = () {
-      registerForEvent(FRESHCHAT_USER_RESTORE_ID_GENERATED, true);
+      _registerForEvent(FRESHCHAT_USER_RESTORE_ID_GENERATED, true);
     };
     return restoreIdStreamController.stream;
   }
 
+  /// Stream which sends the user events for Freshchat
   static Stream get onFreshchatEvents {
     freshchatEventStreamController.onCancel = () {
-      registerForEvent(FRESHCHAT_EVENTS, false);
+      _registerForEvent(FRESHCHAT_EVENTS, false);
     };
     freshchatEventStreamController.onListen = () {
-      registerForEvent(FRESHCHAT_EVENTS, true);
+      _registerForEvent(FRESHCHAT_EVENTS, true);
     };
     return freshchatEventStreamController.stream;
   }
 
+  /// Stream which triggers a callback for every unread message
   static Stream get onMessageCountUpdate {
     messageCountUpdatesStreamController.onCancel = () {
-      registerForEvent(FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED, false);
+      _registerForEvent(FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED, false);
     };
     messageCountUpdatesStreamController.onListen = () {
-      registerForEvent(FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED, true);
+      _registerForEvent(FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED, true);
     };
     return messageCountUpdatesStreamController.stream;
   }
 
+  /// Stream which sends any links opened by user within Freshchat
   static Stream get onRegisterForOpeningLink {
     linkHandlingStreamController.onCancel = () {
-      registerForEvent(ACTION_OPEN_LINKS, false);
+      _registerForEvent(ACTION_OPEN_LINKS, false);
     };
     linkHandlingStreamController.onListen = () {
-      registerForEvent(ACTION_OPEN_LINKS, true);
+      _registerForEvent(ACTION_OPEN_LINKS, true);
     };
     return linkHandlingStreamController.stream;
   }
 
+  /// Stream which triggers a callback on locale change when in webview
   static Stream get onLocaleChangedByWebView {
     webviewStreamController.onCancel = () {
-      registerForEvent(ACTION_LOCALE_CHANGED_BY_WEBVIEW, false);
+      _registerForEvent(ACTION_LOCALE_CHANGED_BY_WEBVIEW, false);
     };
     webviewStreamController.onListen = () {
-      registerForEvent(ACTION_LOCALE_CHANGED_BY_WEBVIEW, true);
+      _registerForEvent(ACTION_LOCALE_CHANGED_BY_WEBVIEW, true);
     };
     return webviewStreamController.stream;
   }

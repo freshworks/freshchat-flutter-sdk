@@ -387,7 +387,7 @@ NSNotificationCenter *center;
         [instance showConversations];
     }else if([@"showFAQ" isEqualToString:call.method]){
         [instance showFAQs];
-    }else if([@"getUserAlias" isEqualToString:call.method]){
+    }else if([@"getFreshchatUserId" isEqualToString:call.method]){
         result([instance getFreshchatUserId]);
     }else if([@"trackEvent" isEqualToString:call.method]){
         [instance trackEvent:call];
