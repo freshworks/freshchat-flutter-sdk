@@ -1,3 +1,9 @@
+## 0.8.0 (TBD)
+
+### Enhancements
+* Added support for null safety
+* Upgraded Freshchat iOS SDK version to 4.2.0
+
 ## 0.7.0 (19/06/2021)
 
 ### Enhancements

@@ -18,6 +18,6 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    expect(await Freshchat.getPlatformVersion, '42');
+    expect(await Freshchat.getSdkVersion, '42');
   });
 }
