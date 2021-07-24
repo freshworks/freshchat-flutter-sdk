@@ -333,7 +333,7 @@ class Freshchat {
   }
 
   /// To identify an user in Freshchat with an unique identifier from your system and restore an user across devices/sessions/platforms based on an external identifier and restore id
-  static void identifyUser({String? externalId, String? restoreId}) {
+  static void identifyUser({required String externalId, String? restoreId}) {
     _channel.invokeMethod(
       'identifyUser',
       <String, String>{
