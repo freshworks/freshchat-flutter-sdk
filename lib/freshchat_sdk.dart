@@ -337,7 +337,7 @@ class Freshchat {
     _channel.invokeMethod(
       'identifyUser',
       <String, String>{
-        'externalId': externalId ?? "",
+        'externalId': externalId,
         'restoreId': restoreId ?? ""
       },
     );
