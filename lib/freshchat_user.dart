@@ -16,7 +16,7 @@ class FreshchatUser {
     return _email;
   }
 
-  FreshchatUser setEmail(String? email) {
+  FreshchatUser setEmail(String email) {
     this._email = email;
     return this;
   }
@@ -25,7 +25,7 @@ class FreshchatUser {
     return _firstName;
   }
 
-  FreshchatUser setFirstName(String? firstName) {
+  FreshchatUser setFirstName(String firstName) {
     this._firstName = firstName;
     return this;
   }
@@ -34,7 +34,7 @@ class FreshchatUser {
     return _lastName;
   }
 
-  FreshchatUser setLastName(String? lastName) {
+  FreshchatUser setLastName(String lastName) {
     this._lastName = lastName;
     return this;
   }
@@ -43,7 +43,7 @@ class FreshchatUser {
     return _phone;
   }
 
-  FreshchatUser setPhone(String? phoneCountryCode, String? phone) {
+  FreshchatUser setPhone(String phoneCountryCode, String phone) {
     this._phoneCountryCode = phoneCountryCode;
     this._phone = phone;
     return this;
