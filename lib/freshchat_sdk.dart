@@ -22,7 +22,7 @@ final StreamController linkHandlingStreamController =
     StreamController.broadcast();
 final StreamController webviewStreamController = StreamController.broadcast();
 
-extension ParseToString on FaqFilterType {
+extension ParseToString on FaqFilterType? {
   String toShortString() {
     return this.toString().split('.').last;
   }
@@ -114,6 +114,14 @@ extension getImportanceValue on Importance {
   }
 }
 
+extension on String? {
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+}
+
+extension on List<String>? {
+  bool get isNullOrEmpty => this == null || this!.isEmpty;
+}
+
 const FRESHCHAT_USER_RESTORE_ID_GENERATED =
     "FRESHCHAT_USER_RESTORE_ID_GENERATED";
 const FRESHCHAT_EVENTS = "FRESHCHAT_EVENTS";
@@ -134,8 +142,8 @@ class Freshchat {
       bool cameraCaptureEnabled = true,
       bool gallerySelectionEnabled = true,
       bool userEventsTrackingEnabled = true,
-      String stringsBundle,
-      String themeName,
+      String? stringsBundle,
+      String? themeName,
       bool errorLogsEnabled = true}) async {
     await _channel.invokeMethod('init', <String, dynamic>{
       'appId': appId,
@@ -169,7 +177,7 @@ class Freshchat {
   ///
   /// [user] is the FreshchatUser object which is constructed with user details
   static void setUser(FreshchatUser user) async {
-    await _channel.invokeMethod('setUser', <String, String>{
+    await _channel.invokeMethod('setUser', <String, String?>{
       'firstName': user.getFirstName(),
       'lastName': user.getLastName(),
       'email': user.getEmail(),
@@ -202,25 +210,25 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.6.0-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.8.0-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
   /// Displays the FAQ Categories Page (Category List Activity) from where users can view and search FAQs
   static void showFAQ(
-      {String faqTitle,
-      String contactUsTitle,
-      List<String> faqTags,
-      List<String> contactUsTags,
-      FaqFilterType faqFilterType,
+      {String? faqTitle,
+      String? contactUsTitle,
+      List<String>? faqTags,
+      List<String>? contactUsTags,
+      FaqFilterType? faqFilterType,
       bool showContactUsOnFaqScreens = true,
       bool showFaqCategoriesAsGrid = true,
       bool showContactUsOnAppBar = false,
       bool showContactUsOnFaqNotHelpful = true}) async {
-    if (faqTitle == null &&
-        contactUsTitle == null &&
-        faqTags == null &&
-        contactUsTags == null) {
+    if (faqTitle.isNullOrEmpty &&
+        contactUsTitle.isNullOrEmpty &&
+        faqTags.isNullOrEmpty &&
+        contactUsTags.isNullOrEmpty) {
       await _channel.invokeMethod('showFAQ');
     } else {
       await _channel.invokeMethod(
@@ -230,7 +238,7 @@ class Freshchat {
           'contactUsTitle': contactUsTitle,
           'faqTags': faqTags,
           'contactUsTags': contactUsTags,
-          'faqFilterType': faqFilterType.toShortString(),
+          'faqFilterType': faqFilterType!.toShortString(),
           'showContactUsOnFaqScreens': showContactUsOnFaqScreens,
           'showFaqCategoriesAsGrid': showFaqCategoriesAsGrid,
           'showContactUsOnAppBar': showContactUsOnAppBar,
@@ -241,7 +249,7 @@ class Freshchat {
   }
 
   /// Track an user event with Freshchat
-  static void trackEvent(String eventName, {Map properties}) async {
+  static void trackEvent(String eventName, {Map? properties}) async {
     await _channel.invokeMethod(
       'trackEvent',
       <String, dynamic>{'eventName': eventName, 'properties': properties},
@@ -257,7 +265,7 @@ class Freshchat {
 
   /// Displays list of Support Channels (Channel List Activity) through which users can converse with you
   static void showConversations(
-      {String filteredViewTitle, List<String> tags}) async {
+      {String? filteredViewTitle, List<String>? tags}) async {
     if (filteredViewTitle == null && tags == null) {
       await _channel.invokeMethod('showConversations');
     } else {
@@ -325,11 +333,11 @@ class Freshchat {
   }
 
   /// To identify an user in Freshchat with an unique identifier from your system and restore an user across devices/sessions/platforms based on an external identifier and restore id
-  static void identifyUser({String externalId, String restoreId}) {
+  static void identifyUser({required String externalId, String? restoreId}) {
     _channel.invokeMethod(
       'identifyUser',
       <String, String>{
-        'externalId': externalId ?? "",
+        'externalId': externalId,
         'restoreId': restoreId ?? ""
       },
     );
@@ -347,23 +355,23 @@ class Freshchat {
       MethodCall methodCall) async {
     switch (methodCall.method) {
       case FRESHCHAT_USER_RESTORE_ID_GENERATED:
-        bool isRestoreIdGenerated = methodCall.arguments;
+        bool? isRestoreIdGenerated = methodCall.arguments;
         restoreIdStreamController.add(isRestoreIdGenerated);
         break;
       case FRESHCHAT_EVENTS:
-        Map event = methodCall.arguments;
+        Map? event = methodCall.arguments;
         freshchatEventStreamController.add(event);
         break;
       case FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED:
-        bool isMessageCountChanged = methodCall.arguments;
+        bool? isMessageCountChanged = methodCall.arguments;
         messageCountUpdatesStreamController.add(isMessageCountChanged);
         break;
       case ACTION_OPEN_LINKS:
-        Map url = methodCall.arguments;
+        Map? url = methodCall.arguments;
         linkHandlingStreamController.add(url);
         break;
       case ACTION_LOCALE_CHANGED_BY_WEBVIEW:
-        Map map = methodCall.arguments;
+        Map? map = methodCall.arguments;
         webviewStreamController.add(map);
         break;
       default:
@@ -377,8 +385,8 @@ class Freshchat {
       Importance importance = Importance.IMPORTANCE_DEFAULT,
       bool notificationSoundEnabled = true,
       bool notificationInterceptionEnabled = false,
-      String largeIcon,
-      String smallIcon}) async {
+      String? largeIcon,
+      String? smallIcon}) async {
     await _channel.invokeMethod(
       'setNotificationConfig',
       <String, dynamic>{

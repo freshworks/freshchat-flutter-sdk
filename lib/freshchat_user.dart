@@ -1,18 +1,18 @@
 class FreshchatUser {
-  String _email;
-  String _firstName;
-  String _lastName;
-  String _phone;
-  String _phoneCountryCode;
-  String _externalId;
-  String _restoreId;
+  String? _email;
+  String? _firstName;
+  String? _lastName;
+  String? _phone;
+  String? _phoneCountryCode;
+  String? _externalId;
+  String? _restoreId;
 
-  FreshchatUser(String externalId, String restoreId) {
+  FreshchatUser(String? externalId, String? restoreId) {
     this._externalId = externalId;
     this._restoreId = restoreId;
   }
 
-  String getEmail() {
+  String? getEmail() {
     return _email;
   }
 
@@ -21,7 +21,7 @@ class FreshchatUser {
     return this;
   }
 
-  String getFirstName() {
+  String? getFirstName() {
     return _firstName;
   }
 
@@ -30,7 +30,7 @@ class FreshchatUser {
     return this;
   }
 
-  String getLastName() {
+  String? getLastName() {
     return _lastName;
   }
 
@@ -39,7 +39,7 @@ class FreshchatUser {
     return this;
   }
 
-  String getPhone() {
+  String? getPhone() {
     return _phone;
   }
 
@@ -49,15 +49,15 @@ class FreshchatUser {
     return this;
   }
 
-  String getPhoneCountryCode() {
+  String? getPhoneCountryCode() {
     return _phoneCountryCode;
   }
 
-  String getExternalId() {
+  String? getExternalId() {
     return _externalId;
   }
 
-  String getRestoreId() {
+  String? getRestoreId() {
     return _restoreId;
   }
 }
