@@ -1,3 +1,8 @@
+## 0.8.1 (07/08/2021)
+
+### Bug Fix
+* Fixed getUser() crash in iOS
+
 ## 0.8.0 (28/07/2021)
 
 ### Enhancements
