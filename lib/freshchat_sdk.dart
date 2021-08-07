@@ -191,9 +191,21 @@ class Freshchat {
     final Map userDetails = await _channel.invokeMethod('getUser');
     FreshchatUser user =
         new FreshchatUser(userDetails["externalId"], userDetails["restoreId"]);
-    user.setEmail(userDetails["email"]);
-    user.setFirstName(userDetails["firstName"]);
-    user.setLastName(userDetails["lastName"]);
+    if (userDetails["email"] != null) {
+      user.setEmail(userDetails["email"]);
+    }
+    if (userDetails["firstName"] != null) {
+      user.setFirstName(userDetails["firstName"]);
+    }
+    if (userDetails["lastName"] != null) {
+      user.setLastName(userDetails["lastName"]);
+    }
+    if (userDetails["phoneCountryCode"] == null) {
+      userDetails["phoneCountryCode"] = "";
+    }
+    if (userDetails["phone"] == null) {
+      userDetails["phone"] = "";
+    }
     user.setPhone(userDetails["phoneCountryCode"], userDetails["phone"]);
     return user;
   }
@@ -210,7 +222,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.8.0-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.8.1-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
@@ -336,10 +348,7 @@ class Freshchat {
   static void identifyUser({required String externalId, String? restoreId}) {
     _channel.invokeMethod(
       'identifyUser',
-      <String, String>{
-        'externalId': externalId,
-        'restoreId': restoreId ?? ""
-      },
+      <String, String>{'externalId': externalId, 'restoreId': restoreId ?? ""},
     );
   }
 
