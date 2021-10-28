@@ -1,3 +1,9 @@
+## 0.9.0 (28/10/2021)
+
+### Enhancements
+* Introducing self-service via bots on the SDK. Bots built using the Unified Bot Builder will now be accessible on the SDK too. Learn more about the capability [here](https://support.freshchat.com/en/support/solutions/articles/50000003778-bots-on-freshdesk-messaging-mobile-sdk).
+* Toggle in init method for show/hide notification banner when app is in foreground - iOS
+
 ## 0.8.1 (07/08/2021)
 
 ### Bug Fix
