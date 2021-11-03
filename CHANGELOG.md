@@ -1,3 +1,8 @@
+## 0.9.1 (03/11/2021)
+
+### Bug Fix
+* Fixed showConversations() crash in iOS
+
 ## 0.9.0 (28/10/2021)
 
 ### Enhancements

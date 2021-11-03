@@ -162,7 +162,15 @@ NSNotificationCenter *center;
 -(void)showConversationsWithOptions:(FlutterMethodCall *) call{
     @try {
         ConversationOptions *options = [ConversationOptions new];
-        [options filterByTags:call.arguments[@"tags"] withTitle:call.arguments[@"filteredViewTitle"]];
+        NSArray *tags = call.arguments[@"tags"];
+        NSString *filteredViewTitle =call.arguments[@"filteredViewTitle"];
+        if([tags isEqual:[NSNull null]]){
+            tags = @[@""];
+        }
+        if([filteredViewTitle isEqual:[NSNull null]]){
+            filteredViewTitle = @"";
+        }
+        [options filterByTags:tags withTitle:filteredViewTitle];
         UIViewController *visibleVC = [[[UIApplication sharedApplication] keyWindow] rootViewController];
         [[Freshchat sharedInstance] showConversations:visibleVC withOptions: options];
     } @catch (NSException *exception) {
@@ -184,6 +192,9 @@ NSNotificationCenter *center;
 -(void)trackEvent:(FlutterMethodCall *) call{
     @try {
         NSDictionary* properties = call.arguments[@"properties"];
+        if([properties isEqual:[NSNull null]]){
+            properties = @{};
+        }
         [[Freshchat sharedInstance] trackEvent:call.arguments[@"eventName"] withProperties:properties];
     } @catch (NSException *exception) {
         NSLog(@"Error on tracking events: %@ %@", exception.name, exception.reason);
@@ -235,7 +246,11 @@ NSNotificationCenter *center;
 -(void)identifyUser:(FlutterMethodCall *) call{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @try {
-            [[Freshchat sharedInstance] identifyUserWithExternalID:call.arguments[@"externalId"] restoreID:call.arguments[@"restoreId"]];
+            NSString *restoreId =call.arguments[@"restoreId"];
+            if([restoreId isEqual:[NSNull null]]){
+                restoreId = @"";
+            }
+            [[Freshchat sharedInstance] identifyUserWithExternalID:call.arguments[@"externalId"] restoreID:restoreId];
         } @catch (NSException *exception) {
             NSLog(@"Error restoring user");       }
     });
