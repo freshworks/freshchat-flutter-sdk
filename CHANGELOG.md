@@ -1,3 +1,8 @@
+## 0.9.2 (08/11/2021)
+
+### Bug Fix
+* Fix CFBundleSupportedPlatforms issue while submitting app to store.
+
 ## 0.9.1 (03/11/2021)
 
 ### Bug Fix
