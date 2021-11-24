@@ -217,6 +217,23 @@ NSNotificationCenter *center;
     }];
 }
 
+-(void)getUnreadCountAsyncForTags:(FlutterMethodCall*)call result:(FlutterResult) result{
+    NSArray *tags = call.arguments[@"tags"];
+    [[Freshchat sharedInstance] unreadCountForTags:tags withCompletion:^(NSInteger unreadCount) {
+        @try {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:@"STATUS_SUCCESS"  forKey:@"status"];
+            [dic setValue:[NSNumber numberWithInteger:unreadCount] forKey:@"count"];
+            result(dic);
+        } @catch (NSException *exception) {
+            NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+            [dic setValue:@"STATUS_ERROR"  forKey:@"status"];
+            [dic setValue:[NSNumber numberWithInteger:unreadCount] forKey:@"count"];
+            result(dic);
+        }
+    }];
+}
+
 -(void)setUserWithIdToken:(FlutterMethodCall *) call{
     @try {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -423,6 +440,8 @@ NSNotificationCenter *center;
         [instance sendMessage:call];
     }else if([@"getUnreadCountAsync" isEqualToString:call.method]){
         [instance getUnreadCountAsync:result];
+    }else if([@"getUnreadCountAsyncForTags" isEqualToString:call.method]){
+        [instance getUnreadCountAsyncForTags:call result:result];
     }else if([@"setUserWithIdToken" isEqualToString:call.method]){
         [instance setUserWithIdToken:call];
     }else if([@"restoreUserWithIdToken" isEqualToString:call.method]){

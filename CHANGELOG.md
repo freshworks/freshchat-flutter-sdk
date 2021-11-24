@@ -1,3 +1,13 @@
+## 0.9.3 (24/11/2021)
+
+### Enhancements
+* Display complete name for messages created using API
+* Support for fetching unread count for a specific channel using tags
+* Resources path update and minor changes for other framework bundle (iOS)
+
+### Bug Fix
+* FAQ contactUs tags filter (iOS)
+
 ## 0.9.2 (08/11/2021)
 
 ### Bug Fix

@@ -273,6 +273,20 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         Freshchat.getInstance(context).getUnreadCountAsync(unreadCountCallback);
     }
 
+    public void getUnreadCountAsyncForTags(MethodCall call, final Result result) {
+        List<String> tags = call.argument("tags");
+        UnreadCountCallback unreadCountCallback = new UnreadCountCallback() {
+            @Override
+            public void onResult(FreshchatCallbackStatus status, int count) {
+                Map unreadCountStatus = new HashMap<>();
+                unreadCountStatus.put("count", count);
+                unreadCountStatus.put("status", status.name());
+                result.success(unreadCountStatus);
+            }
+        };
+        Freshchat.getInstance(context).getUnreadCountAsync(unreadCountCallback, tags);
+    }
+
     public void showConversationsWithOptions(MethodCall call) {
         try {
             List<String> tags = call.argument("tags");
@@ -467,13 +481,13 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         Freshchat.openFreshchatDeeplink(context, link);
     }
 
-    public void linkifyWithPattern(MethodCall call){
+    public void linkifyWithPattern(MethodCall call) {
         String regex = call.argument("regex");
         String defaultScheme = call.argument("defaultScheme");
-        Freshchat.getInstance(context).linkifyWithPattern(regex,defaultScheme);
+        Freshchat.getInstance(context).linkifyWithPattern(regex, defaultScheme);
     }
 
-    public void notifyAppLocaleChange(){
+    public void notifyAppLocaleChange() {
         Freshchat.notifyAppLocaleChange(context);
     }
 
@@ -534,6 +548,10 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
 
                 case "getUnreadCountAsync":
                     getUnreadCountAsync(result);
+                    break;
+
+                case "getUnreadCountAsyncForTags":
+                    getUnreadCountAsyncForTags(call, result);
                     break;
 
                 case "showConversationsWithOptions":
