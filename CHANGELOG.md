@@ -1,3 +1,11 @@
+## 0.9.4 (2021/12/08)
+
+### Enhancement
+* Optimise user create flow (iOS)
+
+### Bug fix
+* Fix for Topic name and image being empty
+
 ## 0.9.3 (24/11/2021)
 
 ### Enhancements
