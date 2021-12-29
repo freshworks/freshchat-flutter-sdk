@@ -8,6 +8,9 @@ import io.flutter.plugin.common.PluginRegistry.PluginRegistrantCallback
 import io.flutter.plugins.GeneratedPluginRegistrant
 import io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingPlugin
 import io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService
+
+// This is not needed if the flutter version used is v1.12 and above
+
 class ExampleApplicationKotlin : FlutterApplication(), PluginRegistrantCallback {
     @Override
     fun onCreate() {

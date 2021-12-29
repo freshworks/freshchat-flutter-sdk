@@ -31,6 +31,7 @@ import com.freshchat.consumer.sdk.FreshchatConfig;
 import com.freshchat.consumer.sdk.Freshchat;
 import com.freshchat.consumer.sdk.FreshchatMessage;
 import com.freshchat.consumer.sdk.FreshchatNotificationConfig;
+import com.freshchat.consumer.sdk.FreshchatUserInteractionListener;
 import com.freshchat.consumer.sdk.FreshchatUser;
 import com.freshchat.consumer.sdk.FreshchatWebViewListener;
 import com.freshchat.consumer.sdk.JwtTokenStatus;
@@ -57,13 +58,19 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
     private FreshchatSDKBroadcastReceiver restoreIdUpdatesReceiver;
     private FreshchatSDKBroadcastReceiver userActionsReceiver;
     private FreshchatSDKBroadcastReceiver messageCountUpdatesReceiver;
+    private FreshchatSDKBroadcastReceiver notificationClickReceiver;
+    private FreshchatSDKBroadcastReceiver jwtRefreshEventReceiver;
+    private FreshchatSDKBroadcastReceiver userInteractionReceiver;
     private static final String LOG_TAG = "FRESHCHAT_FLUTTER";
     private static final String ERROR_TAG = "FRESHCHAT_ERROR";
     private static final String FRESHCHAT_USER_RESTORE_ID_GENERATED = "FRESHCHAT_USER_RESTORE_ID_GENERATED";
     private static final String FRESHCHAT_EVENTS = "FRESHCHAT_EVENTS";
-    private static final String FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED = "FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED";
+    private static final String FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED = "FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED";
     private static final String ACTION_OPEN_LINKS = "ACTION_OPEN_LINKS";
     private static final String ACTION_LOCALE_CHANGED_BY_WEBVIEW = "ACTION_LOCALE_CHANGED_BY_WEBVIEW";
+    private static final String FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED = "FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED";
+    private static final String FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES = "FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES";
+    private static final String FRESHCHAT_ACTION_USER_INTERACTION = "FRESHCHAT_ACTION_USER_INTERACTION";
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -95,7 +102,9 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         freshchatSdkPlugin.channel.setMethodCallHandler(freshchatSdkPlugin);
         freshchatSdkPlugin.restoreIdUpdatesReceiver = freshchatSdkPlugin.new FreshchatSDKBroadcastReceiver(context, Freshchat.FRESHCHAT_USER_RESTORE_ID_GENERATED);
         freshchatSdkPlugin.userActionsReceiver = freshchatSdkPlugin.new FreshchatSDKBroadcastReceiver(context, Freshchat.FRESHCHAT_EVENTS);
-        freshchatSdkPlugin.messageCountUpdatesReceiver = freshchatSdkPlugin.new FreshchatSDKBroadcastReceiver(context, Freshchat.FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED);
+        freshchatSdkPlugin.messageCountUpdatesReceiver = freshchatSdkPlugin.new FreshchatSDKBroadcastReceiver(context, Freshchat.FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED);
+        freshchatSdkPlugin.notificationClickReceiver = freshchatSdkPlugin.new FreshchatSDKBroadcastReceiver(context,Freshchat.FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED);
+        freshchatSdkPlugin.jwtRefreshEventReceiver = freshchatSdkPlugin.new FreshchatSDKBroadcastReceiver(context, Freshchat.FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES);
     }
 
     public Bundle jsonToBundle(@NonNull Map messageMap) {
@@ -362,6 +371,19 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }
 
+    private FreshchatUserInteractionListener userInteractionListener = new FreshchatUserInteractionListener() {
+
+        @Override
+        public void onUserInteraction() {
+            channel.invokeMethod(FRESHCHAT_ACTION_USER_INTERACTION, null);
+        }
+
+        @Override
+        public void onUserLeaveHint() {
+            channel.invokeMethod(FRESHCHAT_ACTION_USER_INTERACTION, null);
+        }
+    };
+
     public void registerForEvent(MethodCall call) {
         String eventName = call.argument("eventName");
         boolean shouldRegister = call.argument("shouldRegister");
@@ -380,18 +402,37 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
                     unregisterBroadcastReceiver(userActionsReceiver);
                 }
                 break;
-            case FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED:
+            case FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED:
                 if (shouldRegister) {
                     registerBroadcastReceiver(messageCountUpdatesReceiver, Freshchat.FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED);
                 } else {
                     unregisterBroadcastReceiver(messageCountUpdatesReceiver);
                 }
                 break;
+            case FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED:
+                if (shouldRegister){
+                    registerBroadcastReceiver(notificationClickReceiver, Freshchat.FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED);
+                } else {
+                    unregisterBroadcastReceiver(notificationClickReceiver);
+                }
+            case FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES:
+                if (shouldRegister){
+                    registerBroadcastReceiver(jwtRefreshEventReceiver, Freshchat.FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES);
+                } else {
+                    unregisterBroadcastReceiver(jwtRefreshEventReceiver);
+                }
             case ACTION_OPEN_LINKS:
                 registerForOpeningLink(shouldRegister);
                 break;
             case ACTION_LOCALE_CHANGED_BY_WEBVIEW:
                 registerForLocaleChangedByWebview(shouldRegister);
+                break;
+            case FRESHCHAT_ACTION_USER_INTERACTION:
+                if (shouldRegister){
+                    Freshchat.getInstance(context).setFreshchatUserInteractionListener(userInteractionListener);
+                }else{
+                    Freshchat.getInstance(context).setFreshchatUserInteractionListener(null);
+                }
                 break;
             default:
                 Log.e(ERROR_TAG, "Invalid event name passed for register: " + eventName);
@@ -662,21 +703,20 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
                     }
                     channel.invokeMethod(FRESHCHAT_EVENTS, data);
                     break;
-                case Freshchat.FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED:
-                    channel.invokeMethod(FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED, true);
+                case Freshchat.FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED:
+                    channel.invokeMethod(FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED, true);
+                    break;
+                case Freshchat.FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES:
+                    channel.invokeMethod(FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES, data);
+                    break;
+                case Freshchat.FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED:
+                    data.put("url", intent.getExtras().getString("FRESHCHAT_DEEPLINK"));
+                    channel.invokeMethod(FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED, data);
                     break;
                 default:
                     Log.e(ERROR_TAG, "Invalid Event received");
             }
 
-            HashMap map = new HashMap<>();
-            if (intent.getExtras() != null) {
-                if (Freshchat.FRESHCHAT_EVENTS.equals(eventName)) {
-                } else if (Freshchat.FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED.equals(eventName)) {
-                    map.put("url", intent.getExtras().getString("FRESHCHAT_DEEPLINK"));
-                }
-
-            }
         }
 
     }

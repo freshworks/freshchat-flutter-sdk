@@ -14,8 +14,9 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		AF93D455264FCF2E002787E5 /* CustomTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF93D453264FCF2E002787E5 /* CustomTheme.plist */; };
-		AF93D456264FCF2E002787E5 /* FCCustomLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AF93D454264FCF2E002787E5 /* FCCustomLocalizable.bundle */; };
+		AFE69231277C6D36003F7C97 /* CustomTheme.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFE69230277C6D36003F7C97 /* CustomTheme.plist */; };
+		AFE69233277C6D3F003F7C97 /* FCCustomLocalizable.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AFE69232277C6D3F003F7C97 /* FCCustomLocalizable.bundle */; };
+		AFE69235277C728D003F7C97 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AFE69234277C728C003F7C97 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,8 +51,9 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF88552E26240E390016DBD2 /* RunnerDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunnerDebug.entitlements; sourceTree = "<group>"; };
 		AF88552F26240E760016DBD2 /* RunnerRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = RunnerRelease.entitlements; sourceTree = "<group>"; };
-		AF93D453264FCF2E002787E5 /* CustomTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = CustomTheme.plist; path = ../../../../../../Desktop/CustomTheme.plist; sourceTree = "<group>"; };
-		AF93D454264FCF2E002787E5 /* FCCustomLocalizable.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FCCustomLocalizable.bundle; path = ../../../../../../Desktop/FCCustomLocalizable.bundle; sourceTree = "<group>"; };
+		AFE69230277C6D36003F7C97 /* CustomTheme.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CustomTheme.plist; sourceTree = "<group>"; };
+		AFE69232277C6D3F003F7C97 /* FCCustomLocalizable.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FCCustomLocalizable.bundle; sourceTree = "<group>"; };
+		AFE69234277C728C003F7C97 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB26DA3439975B79CD255389 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,8 +120,9 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
-				AF93D453264FCF2E002787E5 /* CustomTheme.plist */,
-				AF93D454264FCF2E002787E5 /* FCCustomLocalizable.bundle */,
+				AFE69234277C728C003F7C97 /* GoogleService-Info.plist */,
+				AFE69232277C6D3F003F7C97 /* FCCustomLocalizable.bundle */,
+				AFE69230277C6D36003F7C97 /* CustomTheme.plist */,
 				AF88552F26240E760016DBD2 /* RunnerRelease.entitlements */,
 				AF88552E26240E390016DBD2 /* RunnerDebug.entitlements */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
@@ -198,12 +201,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF93D456264FCF2E002787E5 /* FCCustomLocalizable.bundle in Resources */,
-				AF93D455264FCF2E002787E5 /* CustomTheme.plist in Resources */,
+				AFE69233277C6D3F003F7C97 /* FCCustomLocalizable.bundle in Resources */,
+				AFE69231277C6D36003F7C97 /* CustomTheme.plist in Resources */,
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+				AFE69235277C728D003F7C97 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

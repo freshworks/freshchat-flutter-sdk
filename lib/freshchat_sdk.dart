@@ -21,6 +21,10 @@ final StreamController messageCountUpdatesStreamController =
 final StreamController linkHandlingStreamController =
     StreamController.broadcast();
 final StreamController webviewStreamController = StreamController.broadcast();
+final StreamController notificationInterceptController =
+    StreamController.broadcast();
+final StreamController refreshJwtController = StreamController.broadcast();
+final StreamController userInteractionController = StreamController.broadcast();
 
 extension ParseToString on FaqFilterType? {
   String toShortString() {
@@ -125,10 +129,15 @@ extension on List<String>? {
 const FRESHCHAT_USER_RESTORE_ID_GENERATED =
     "FRESHCHAT_USER_RESTORE_ID_GENERATED";
 const FRESHCHAT_EVENTS = "FRESHCHAT_EVENTS";
-const FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED =
-    "FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED";
+const FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED =
+    "FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED";
 const ACTION_OPEN_LINKS = "ACTION_OPEN_LINKS";
 const ACTION_LOCALE_CHANGED_BY_WEBVIEW = "ACTION_LOCALE_CHANGED_BY_WEBVIEW";
+const FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED =
+    "FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED";
+const FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES =
+    "FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES";
+const FRESHCHAT_ACTION_USER_INTERACTION = "FRESHCHAT_ACTION_USER_INTERACTION";
 
 class Freshchat {
   static const MethodChannel _channel = const MethodChannel('freshchat_sdk');
@@ -224,7 +233,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.9.4-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.9.5-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
@@ -380,7 +389,7 @@ class Freshchat {
         Map? event = methodCall.arguments;
         freshchatEventStreamController.add(event);
         break;
-      case FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED:
+      case FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED:
         bool? isMessageCountChanged = methodCall.arguments;
         messageCountUpdatesStreamController.add(isMessageCountChanged);
         break;
@@ -391,6 +400,19 @@ class Freshchat {
       case ACTION_LOCALE_CHANGED_BY_WEBVIEW:
         Map? map = methodCall.arguments;
         webviewStreamController.add(map);
+        break;
+      case FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED:
+        Map? url = methodCall.arguments;
+        print("Rohit flutter: notification event callback received");
+        notificationInterceptController.add(url);
+        break;
+      case FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES:
+        Map? isJwtRefresh = methodCall.arguments;
+        refreshJwtController.add(isJwtRefresh);
+        break;
+      case FRESHCHAT_ACTION_USER_INTERACTION:
+        Map? userInteraction = methodCall.arguments;
+        userInteractionController.add(userInteraction);
         break;
       default:
         print("No such method implementation");
@@ -489,10 +511,10 @@ class Freshchat {
   /// Stream which triggers a callback for every unread message
   static Stream get onMessageCountUpdate {
     messageCountUpdatesStreamController.onCancel = () {
-      _registerForEvent(FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED, false);
+      _registerForEvent(FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED, false);
     };
     messageCountUpdatesStreamController.onListen = () {
-      _registerForEvent(FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED, true);
+      _registerForEvent(FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED, true);
     };
     return messageCountUpdatesStreamController.stream;
   }
@@ -517,5 +539,39 @@ class Freshchat {
       _registerForEvent(ACTION_LOCALE_CHANGED_BY_WEBVIEW, true);
     };
     return webviewStreamController.stream;
+  }
+
+  /// Stream which triggers a callback on clicking notification
+  static Stream get onNotificationIntercept {
+    notificationInterceptController.onCancel = () {
+      _registerForEvent(FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED, false);
+    };
+    notificationInterceptController.onListen = () {
+      _registerForEvent(FRESHCHAT_ACTION_NOTIFICATION_INTERCEPTED, true);
+    };
+    return notificationInterceptController.stream;
+  }
+
+  /// Stream which triggers a callback on JWT token refresh
+  static Stream get onJwtRefresh {
+    refreshJwtController.onCancel = () {
+      _registerForEvent(
+          FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES, false);
+    };
+    refreshJwtController.onListen = () {
+      _registerForEvent(FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES, true);
+    };
+    return refreshJwtController.stream;
+  }
+
+  /// Stream which triggers a callback on user interaction in SDK
+  static Stream get onUserInteraction {
+    userInteractionController.onCancel = () {
+      _registerForEvent(FRESHCHAT_ACTION_USER_INTERACTION, false);
+    };
+    userInteractionController.onListen = () {
+      _registerForEvent(FRESHCHAT_ACTION_USER_INTERACTION, true);
+    };
+    return userInteractionController.stream;
   }
 }

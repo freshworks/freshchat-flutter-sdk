@@ -302,11 +302,11 @@ class _MyHomePageState extends State<MyHomePage> {
           return alert;
         });
   }
-
+  static const String APP_ID="",APP_KEY="",DOMAIN="";
   void initState() {
     super.initState();
-    Freshchat.init("APP-ID",
-        "APP-KEY", "DOMAIN",stringsBundle: "FCCustomLocalizable",themeName: "CustomTheme.plist");
+    Freshchat.init(APP_ID,
+        APP_KEY, DOMAIN);
     /**
      * This is the Firebase push notification server key for this sample app.
      * Please save this in your Freshchat account to test push notifications in Sample app.
@@ -320,10 +320,25 @@ class _MyHomePageState extends State<MyHomePage> {
       print("Restore ID Generated: $event");
       notifyRestoreId(event);
     });
+
+    var userInteractionStream = Freshchat.onUserInteraction;
+    userInteractionStream.listen((event) {
+      print("User interaction for Freshchat SDK");
+    });
+
     if (Platform.isAndroid) {
       registerFcmToken();
       FirebaseMessaging.instance.onTokenRefresh.listen(
           Freshchat.setPushRegistrationToken);
+
+      Freshchat.setNotificationConfig(notificationInterceptionEnabled: true);
+      var notificationInterceptStream = Freshchat.onNotificationIntercept;
+      notificationInterceptStream.listen((event) {
+        print("Freshchat Notification Intercept detected");
+        Freshchat.openFreshchatDeeplink(event["url"]);
+      });
+
+
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         var data = message.data;
         handleFreshchatNotification(data);

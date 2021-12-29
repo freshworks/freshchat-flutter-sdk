@@ -1,4 +1,13 @@
-## 0.9.4 (2021/12/08)
+## 0.9.5 (28/12/2021)
+
+### Enhancement
+* Ability to intercept notification clicks in Android
+* Ability to listen to user interactions
+
+### Bug fix
+* Fix for displaying notifications in Android 12
+
+## 0.9.4 (08/12/2021)
 
 ### Enhancement
 * Optimise user create flow (iOS)

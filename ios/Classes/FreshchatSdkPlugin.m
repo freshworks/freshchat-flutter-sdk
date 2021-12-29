@@ -5,6 +5,14 @@
 #import "FreshchatSDK/FreshchatSDK.h"
 #endif
 
+@implementation FreshchatSdkPluginWindow
+
+- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+    [[NSNotificationCenter defaultCenter] postNotificationName:FRESHCHAT_USER_INTERACTED object:self];
+    return [super hitTest:point withEvent:event];
+}
+@end
+
 @implementation FreshchatSdkPlugin
 
 FlutterMethodChannel* channel;
@@ -12,7 +20,10 @@ FreshchatSdkPlugin* instance;
 NSObject* freshchatEvent;
 NSObject* restoreEvent;
 NSObject* messageCountEvent;
+NSObject* jwtRefreshEvent;
+NSObject* userInteractionEvent;
 NSNotificationCenter *center;
+
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     channel = [FlutterMethodChannel
                methodChannelWithName:@"freshchat_sdk"
@@ -305,6 +316,15 @@ NSNotificationCenter *center;
         }else
         if([eventName isEqual:(@"ACTION_LOCALE_CHANGED_BY_WEBVIEW")]){
             NSLog(@"ACTION_LOCALE_CHANGED_BY_WEBVIEW not supported in iOS");
+        }else
+        if([eventName isEqual:(@"FRESHCHAT_ACTION_NOTIFICATION_CLICK_LISTENER")]){
+            NSLog(@"FRESHCHAT_ACTION_NOTIFICATION_CLICK_LISTENER not needed in flutter iOS");
+        }else
+        if([eventName isEqual:(@"FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES")]){
+            [instance registerForJWTRefresh:YES];
+        }else
+        if([eventName isEqual:(@"FRESHCHAT_ACTION_USER_INTERACTION")]){
+            [instance registerForUserInteraction:YES];
         }
     }
     else{
@@ -322,6 +342,15 @@ NSNotificationCenter *center;
         }else
         if([eventName isEqual:(@"ACTION_LOCALE_CHANGED_BY_WEBVIEW")]){
             NSLog(@"ACTION_LOCALE_CHANGED_BY_WEBVIEW not supported in iOS");
+        }else
+        if([eventName isEqual:(@"FRESHCHAT_ACTION_NOTIFICATION_CLICK_LISTENER")]){
+            NSLog(@"FRESHCHAT_ACTION_NOTIFICATION_CLICK_LISTENER not needed in flutter iOS");
+        }else
+        if([eventName isEqual:(@"FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES")]){
+            [instance registerForJWTRefresh:NO];
+        }else
+        if([eventName isEqual:(@"FRESHCHAT_ACTION_USER_INTERACTION")]){
+            [instance registerForUserInteraction:NO];
         }
     }
 }
@@ -372,7 +401,7 @@ NSNotificationCenter *center;
         }];
     }
     else {
-        [center removeObserver:freshchatEvent
+        [center removeObserver:messageCountEvent
                           name:FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED object:nil];
     }
 }
@@ -393,6 +422,33 @@ NSNotificationCenter *center;
         [Freshchat sharedInstance].customLinkHandler = nil;
     }
 }
+
+-(void)registerForJWTRefresh:(BOOL)shouldRegister
+{
+    if (shouldRegister == YES) {
+        jwtRefreshEvent = [[NSNotificationCenter defaultCenter]addObserverForName:FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+            [channel invokeMethod:@"FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES"
+                        arguments:@YES];
+        }];
+    } else {
+        [center removeObserver:jwtRefreshEvent
+                          name:FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES object:nil];
+    }
+}
+
+-(void)registerForUserInteraction:(BOOL)shouldRegister
+{
+    if (shouldRegister == YES) {
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(userInteracted:) name:FRESHCHAT_USER_INTERACTED object:nil];
+    } else {
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:FRESHCHAT_USER_INTERACTED object:nil];
+    }
+}
+
+-(void) userInteracted:(NSNotification *) notification {
+    [channel invokeMethod:@"FRESHCHAT_ACTION_USER_INTERACTION" arguments: nil];
+}
+
 
 - (UIViewController*) topMostController {
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;

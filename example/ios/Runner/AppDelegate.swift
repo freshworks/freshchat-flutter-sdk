@@ -8,6 +8,14 @@ import UserNotifications
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
+    
+    // Below code is implementation for user interaction listener support
+    // FreshchatSdkPluginWindow needs to be initialised in the target application's app delegate for the user interaction listener to work
+    // @property (nonatomic, strong) FreshchatSdkPluginWindow *window; should be added in the header file as well
+    let viewController = UIApplication.shared.windows.first!.rootViewController as! UIViewController
+    window = FreshchatSdkPluginWindow(frame: UIScreen.main.bounds)
+    window.rootViewController = viewController
+    
     if #available(iOS 10.0, *) {
         UNUserNotificationCenter.current().delegate = self
     } else {

@@ -10,16 +10,18 @@ import io.flutter.plugins.GeneratedPluginRegistrant;
 import io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingPlugin;
 import io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService;
 
-public class ExampleApplication extends FlutterApplication implements PluginRegistrantCallback {
-    @Override
+// This is not needed if the flutter version used is v1.12 and above
+
+public class ExampleApplication extends FlutterApplication {
+//    @Override
     public void onCreate() {
-        super.onCreate();
-        FlutterFirebaseMessagingBackgroundService.setPluginRegistrant(this);
+//        super.onCreate();
+//        FlutterFirebaseMessagingBackgroundService.setPluginRegistrant(this);
     }
 
-    @Override
+//    @Override
     public void registerWith(PluginRegistry registry) {
-        FlutterFirebaseMessagingPlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin"));
+//        FlutterFirebaseMessagingPlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin"));
         FreshchatSdkPlugin.register(registry);
     }
 }
