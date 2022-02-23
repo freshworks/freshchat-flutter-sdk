@@ -509,7 +509,7 @@ NSNotificationCenter *center;
     }else if([@"setNotificationConfig" isEqualToString:call.method]){
         [instance setNotificationConfig];
     }else if([@"setPushRegistrationToken" isEqualToString:call.method]){
-        [instance setPushRegistrationToken:[call.arguments[@"token"]dataUsingEncoding:NSUTF8StringEncoding]];
+        [instance setPushRegistrationToken:call.arguments[@"token"]];
     }else if([@"isFreshchatNotification" isEqualToString:call.method]){
         if([instance isFreshchatNotification:call.arguments[@"pushPayload"]]){
             result(@YES);
