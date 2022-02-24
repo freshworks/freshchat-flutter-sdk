@@ -1,3 +1,17 @@
+## 0.9.6 (24/02/2022)
+
+### Bug fixes
+* Fix for dismissing keyboard when moving from Chat screen to App screen (Android)
+* Fix for handing empty CSAT (Android)
+* Fix FAQ article title override in search flow (iOS)
+* Unread count overlap for topic list (iOS)
+* Black navigation bar appearance on navigating via push notification (iOS)
+* Rare invalid domain prompt during sdk initialization (iOS)
+* Quick replies options support only for last message in a conversation (iOS)
+* Sporadic crash while opening a chat when translation enabled (iOS)
+* Crash on showFaq when either title or tags are null (iOS)
+* Minor bug fixes (iOS)
+
 ## 0.9.5 (28/12/2021)
 
 ### Enhancement
