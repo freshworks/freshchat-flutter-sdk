@@ -233,7 +233,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.9.6-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.9.7-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
@@ -259,8 +259,8 @@ class Freshchat {
         <String, dynamic>{
           'faqTitle': faqTitle ?? "",
           'contactUsTitle': contactUsTitle ?? "",
-          'faqTags': faqTags ?? [""],
-          'contactUsTags': contactUsTags ?? [""],
+          'faqTags': faqTags,
+          'contactUsTags': contactUsTags,
           'faqFilterType': faqFilterType!.toShortString(),
           'showContactUsOnFaqScreens': showContactUsOnFaqScreens,
           'showFaqCategoriesAsGrid': showFaqCategoriesAsGrid,

@@ -1,3 +1,16 @@
+## 0.9.7 (23/03/2022)
+
+### Enhancements
+* Support for Dynamic Framework (iOS)
+
+### Bug fixes
+* Fixed unread message count listener (iOS)
+* Package update for SPM (iOS)
+* Fixed notification not being shown in the notification tray, when the app is in the background (Android)
+* Fixed an issue with restoring a user using JWT (Android)
+* Fixed an issue with sending APNS device token to Freshchat from Flutter
+* Fixed an issue with toast message appearing when launching FAQs with options (Android)
+
 ## 0.9.6 (24/02/2022)
 
 ### Bug fixes

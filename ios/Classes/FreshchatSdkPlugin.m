@@ -23,7 +23,6 @@ NSObject* messageCountEvent;
 NSObject* jwtRefreshEvent;
 NSObject* userInteractionEvent;
 NSNotificationCenter *center;
-
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     channel = [FlutterMethodChannel
                methodChannelWithName:@"freshchat_sdk"
@@ -308,7 +307,7 @@ NSNotificationCenter *center;
         if([eventName isEqual:(@"FRESHCHAT_EVENTS")]){
             [instance registerForUserActions:YES];
         }else
-        if([eventName isEqual:(@"FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED")]){
+        if([eventName isEqual:(@"FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED")]){
             [instance registerForMessageCountUpdates:YES];
         }else
         if([eventName isEqual:(@"ACTION_OPEN_LINKS")]){
@@ -334,7 +333,7 @@ NSNotificationCenter *center;
         if([eventName isEqual:(@"FRESHCHAT_EVENTS")]){
             [instance registerForUserActions:NO];
         }else
-        if([eventName isEqual:(@"FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED")]){
+        if([eventName isEqual:(@"FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED")]){
             [instance registerForMessageCountUpdates:NO];
         }else
         if([eventName isEqual:(@"ACTION_OPEN_LINKS")]){
@@ -396,7 +395,7 @@ NSNotificationCenter *center;
 {
     if (shouldRegister == YES) {
         messageCountEvent = [[NSNotificationCenter defaultCenter]addObserverForName:FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-            [channel invokeMethod:@"FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED"
+            [channel invokeMethod:@"FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED"
                         arguments:@YES];
         }];
     }
@@ -509,7 +508,7 @@ NSNotificationCenter *center;
     }else if([@"setNotificationConfig" isEqualToString:call.method]){
         [instance setNotificationConfig];
     }else if([@"setPushRegistrationToken" isEqualToString:call.method]){
-        [instance setPushRegistrationToken:[call.arguments[@"token"]dataUsingEncoding:NSUTF8StringEncoding]];
+        [instance setPushRegistrationToken:call.arguments[@"token"]];
     }else if([@"isFreshchatNotification" isEqualToString:call.method]){
         if([instance isFreshchatNotification:call.arguments[@"pushPayload"]]){
             result(@YES);

@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:freshchat_sdk/freshchat_user.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -51,8 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   final GlobalKey<ScaffoldState>? _scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  void registerFcmToken() async{
-    if(Platform.isAndroid) {
+  void registerFcmToken() async {
+    if (Platform.isAndroid) {
       String? token = await FirebaseMessaging.instance.getToken();
       print("FCM Token is generated $token");
       Freshchat.setPushRegistrationToken(token!);
@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               onPressed: () {
                 setState(
-                      () {
+                  () {
                     Freshchat.identifyUser(
                         externalId: externalId, restoreId: restoreId);
                     Navigator.of(context, rootNavigator: true).pop(context);
@@ -138,16 +138,19 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  void notifyRestoreId(var event) async{
+  void notifyRestoreId(var event) async {
     FreshchatUser user = await Freshchat.getUser;
     String? restoreId = user.getRestoreId();
-    Clipboard.setData(new ClipboardData(text: restoreId));
-    _scaffoldKey!.currentState!.showSnackBar(new SnackBar(content: new Text("Restore ID copied: $restoreId")));
+    if (restoreId != null){
+      Clipboard.setData(new ClipboardData(text: restoreId));
+    }
+    _scaffoldKey!.currentState!.showSnackBar(
+        new SnackBar(content: new Text("Restore ID copied: $restoreId")));
   }
 
   void getUserProps(BuildContext context) {
     final _userInfoKey = new GlobalKey<FormState>();
-    String? key,value;
+    String? key, value;
     var alert = AlertDialog(
       scrollable: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -225,7 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void sendMessageApi(BuildContext context) {
     final _userInfoKey = new GlobalKey<FormState>();
-    String? conversationTag,message;
+    String? conversationTag, message;
     var alert = AlertDialog(
       scrollable: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -273,7 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               onPressed: () {
                 setState(
-                      () {
+                  () {
                     Freshchat.sendMessage(conversationTag!, message!);
                     Navigator.of(context, rootNavigator: true).pop(context);
                   },
@@ -302,11 +305,11 @@ class _MyHomePageState extends State<MyHomePage> {
           return alert;
         });
   }
-  static const String APP_ID="",APP_KEY="",DOMAIN="";
+
+  static const String APP_ID = "", APP_KEY = "", DOMAIN = "";
   void initState() {
     super.initState();
-    Freshchat.init(APP_ID,
-        APP_KEY, DOMAIN);
+    Freshchat.init(APP_ID, APP_KEY, DOMAIN);
     /**
      * This is the Firebase push notification server key for this sample app.
      * Please save this in your Freshchat account to test push notifications in Sample app.
@@ -321,6 +324,11 @@ class _MyHomePageState extends State<MyHomePage> {
       notifyRestoreId(event);
     });
 
+    var unreadCountStream = Freshchat.onMessageCountUpdate;
+    unreadCountStream.listen((event) {
+        print("Have unread messages: $event");
+      });
+
     var userInteractionStream = Freshchat.onUserInteraction;
     userInteractionStream.listen((event) {
       print("User interaction for Freshchat SDK");
@@ -328,8 +336,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     if (Platform.isAndroid) {
       registerFcmToken();
-      FirebaseMessaging.instance.onTokenRefresh.listen(
-          Freshchat.setPushRegistrationToken);
+      FirebaseMessaging.instance.onTokenRefresh
+          .listen(Freshchat.setPushRegistrationToken);
 
       Freshchat.setNotificationConfig(notificationInterceptionEnabled: true);
       var notificationInterceptStream = Freshchat.onNotificationIntercept;
@@ -337,7 +345,6 @@ class _MyHomePageState extends State<MyHomePage> {
         print("Freshchat Notification Intercept detected");
         Freshchat.openFreshchatDeeplink(event["url"]);
       });
-
 
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
         var data = message.data;
