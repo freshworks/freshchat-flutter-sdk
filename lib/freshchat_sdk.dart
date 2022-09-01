@@ -45,27 +45,21 @@ extension getPriorityValue on Priority {
     switch (this) {
       case Priority.PRIORITY_DEFAULT:
         return 0;
-        break;
 
       case Priority.PRIORITY_LOW:
         return -1;
-        break;
 
       case Priority.PRIORITY_MIN:
         return -2;
-        break;
 
       case Priority.PRIORITY_HIGH:
         return 1;
-        break;
 
       case Priority.PRIORITY_MAX:
         return 2;
-        break;
 
       default:
         return 0;
-        break;
     }
   }
 }
@@ -233,7 +227,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.9.7-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.9.8-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 

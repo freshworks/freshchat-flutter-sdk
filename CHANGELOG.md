@@ -1,3 +1,24 @@
+## 0.9.8 (31/08/2022)
+
+### Feature
+* Support for read-only and single select carousel in bots flow (iOS)
+* Support for quick options in bot flow
+
+### Enhancements
+* New device models added to track user devices (iOS)
+* Redesign of "Powered by Freshworks" banner
+
+### Bug fixes
+* Theme fix for CSAT prompt (iOS)
+* Display missing suggested article(s) in initial bot flow (iOS)
+* Incorrect display of messages in a botflow (iOS)
+* CFBundleExecutable error while uploading to AppStore (iOS)
+* Display timestamp value for bot messages (iOS)
+* Support for ```<li>,<ol>``` and ```<ul>``` html tags in messages (iOS)
+* Update custom response expectation message with locale change (iOS)
+* Add TOKEN_NOT_PROCESSED state for JWT auth users (iOS)
+* Fix for ConnectivityManager leak (Android)
+
 ## 0.9.7 (23/03/2022)
 
 ### Enhancements
