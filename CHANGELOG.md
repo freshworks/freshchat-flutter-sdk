@@ -1,3 +1,13 @@
+## 0.9.9 (20/10/2022)
+
+### Features
+* Bot will now be able to validate text in Mobile number, Email-ID and Number input types from customer in the conversation.
+* Customer can upload file for bot flows and attachment option.
+
+### Bug fixes
+* Better handling of HTML content in messages (iOS)
+* Allow encoded strings with quick actions and replies in messages (iOS)
+
 ## 0.9.8 (31/08/2022)
 
 ### Feature

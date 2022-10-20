@@ -79,35 +79,27 @@ extension getImportanceValue on Importance {
     switch (this) {
       case Importance.IMPORTANCE_UNSPECIFIED:
         return -1000;
-        break;
 
       case Importance.IMPORTANCE_NONE:
         return 0;
-        break;
 
       case Importance.IMPORTANCE_MIN:
         return 1;
-        break;
 
       case Importance.IMPORTANCE_LOW:
         return 2;
-        break;
 
       case Importance.IMPORTANCE_DEFAULT:
         return 3;
-        break;
 
       case Importance.IMPORTANCE_HIGH:
         return 4;
-        break;
 
       case Importance.IMPORTANCE_MAX:
         return 5;
-        break;
 
       default:
         return 3;
-        break;
     }
   }
 }
@@ -227,7 +219,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.9.8-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.9.9-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
