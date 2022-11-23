@@ -140,7 +140,8 @@ class Freshchat {
       String? stringsBundle,
       String? themeName,
       bool errorLogsEnabled = true,
-      bool showNotificationBanneriOS = true}) async {
+      bool showNotificationBanneriOS = true,
+      bool fileSelectionEnabled = true}) async {
     await _channel.invokeMethod('init', <String, dynamic>{
       'appId': appId,
       'appKey': appKey,
@@ -153,7 +154,8 @@ class Freshchat {
       'stringsBundle': stringsBundle,
       'themeName': themeName,
       'errorLogsEnabled': errorLogsEnabled,
-      'showNotificationBanneriOS': showNotificationBanneriOS
+      'showNotificationBanneriOS': showNotificationBanneriOS,
+      'fileSelectionEnabled': fileSelectionEnabled
     });
   }
 
@@ -219,7 +221,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.9.9-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.10.0-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 

@@ -1,3 +1,21 @@
+## 0.10.0 (23/11/2022)
+
+### Feature
+* This version lets you receive feedback (opinion polls & comments) from users during bot interactions (iOS)
+
+### Enhancements
+* Updated targetSdkVersion to Android 12 (Android)
+* Minor UI changes and improvements to accomodate for ios devices and versions (iOS)
+
+### Bug fixes
+* Fix for Quick Action Pre-defined buttons (iOS)
+* Fix impacting CSAT users for RTL users (iOS)
+* Fix for the next bot flow to trigger on selecting carousel (Android)
+* Fix for clearing error message for invalid input in bot flow (Android)
+* Fix for handling empty messages (Android)
+* Fix for handling quick actions menu overlapping in landscape mode (Android)
+* Fix for custom attachment icons appearing too large in v0.9.9 (Android)
+
 ## 0.9.9 (20/10/2022)
 
 ### Features

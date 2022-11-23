@@ -44,6 +44,7 @@ NSNotificationCenter *center;
         freshchatConfig.eventsUploadEnabled = [call.arguments[@"userEventsTrackingEnabled"]boolValue];
         freshchatConfig.errorLogsEnabled = [call.arguments[@"errorLogsEnabled"]boolValue];
         freshchatConfig.showNotificationBanner = [call.arguments[@"showNotificationBanneriOS"]boolValue];
+        freshchatConfig.fileAttachmentEnabled = [call.arguments[@"fileSelectionEnabled"]boolValue];
         NSString* stringsBundle = call.arguments[@"stringsBundle"];
         NSString* themeName = call.arguments[@"themeName"];
         if(![themeName isEqual:[NSNull null]]) {

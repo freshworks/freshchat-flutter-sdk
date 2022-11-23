@@ -143,6 +143,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
             boolean cameraCaptureEnabled = call.argument("cameraCaptureEnabled");
             boolean gallerySelectionEnabled = call.argument("gallerySelectionEnabled");
             boolean userEventsTrackingEnabled = call.argument("userEventsTrackingEnabled");
+            boolean fileSelectionEnabled = call.argument("fileSelectionEnabled");
             freshchatConfig = new FreshchatConfig(appId, appKey);
             freshchatConfig.setDomain(domain);
             freshchatConfig.setResponseExpectationEnabled(responseExpectationEnabled);
@@ -150,6 +151,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
             freshchatConfig.setGallerySelectionEnabled(gallerySelectionEnabled);
             freshchatConfig.setUserEventsTrackingEnabled(userEventsTrackingEnabled);
             freshchatConfig.setCameraCaptureEnabled(cameraCaptureEnabled);
+            freshchatConfig.setFileSelectionEnabled(fileSelectionEnabled);
             Freshchat.getInstance(context).init(freshchatConfig);
         } catch (Exception e) {
             Log.e(ERROR_TAG, e.toString());
