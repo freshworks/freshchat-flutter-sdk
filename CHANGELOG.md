@@ -1,3 +1,11 @@
+## 0.10.1 (06/12/2022)
+
+### Bug fix
+* Fix for agent/bot message timestamp aligning to the right end of the message bubble (Android)
+
+### Enhancement
+* Changes to support Push notifications with P8 certification (iOS)
+
 ## 0.10.0 (23/11/2022)
 
 ### Feature
