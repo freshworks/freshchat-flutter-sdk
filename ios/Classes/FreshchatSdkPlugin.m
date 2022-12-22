@@ -154,9 +154,9 @@ NSNotificationCenter *center;
         options.showContactUsOnFaqNotHelpful = [call.arguments[@"showContactUsOnFaqNotHelpful"]boolValue];
         NSString* filterType = call.arguments[@"faqFilterType"];
         if(![faqTagsList isEqual:[NSNull null]] && ![faqTitle isEqual:[NSNull null]]){
-            if([@"Category" isEqualToString:filterType]) {
+            if(![filterType isEqual:[NSNull null]] && [@"Category" isEqualToString:filterType]) {
                 [options filterByTags:faqTagsList withTitle:faqTitle andType: CATEGORY];
-            }else{
+            } else{
                 [options filterByTags:call.arguments[@"faqTags"] withTitle:call.arguments[@"faqTitle"] andType: ARTICLE];
             }
         }

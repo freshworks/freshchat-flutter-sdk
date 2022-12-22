@@ -1,10 +1,18 @@
-## 0.10.1 (06/12/2022)
+## 0.10.2 (22/12/2022)
+
+### Feature
+* Support for Read Only and Single Select carousel for bot flow (Android)
 
 ### Bug fix
-* Fix for agent/bot message timestamp aligning to the right end of the message bubble (Android)
+* Fix for FAQ configurations not working when no tags are provided.
+
+## 0.10.1 (06/12/2022)
 
 ### Enhancement
 * Changes to support Push notifications with P8 certification (iOS)
+
+### Bug fix
+* Fix for agent/bot message timestamp aligning to the right end of the message bubble (Android)
 
 ## 0.10.0 (23/11/2022)
 

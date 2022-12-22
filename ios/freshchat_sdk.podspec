@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'freshchat_sdk'
-  s.version          = '0.10.1'
+  s.version          = '0.10.2'
   s.summary          = 'Freshchat Flutter SDK - iOS'
   s.description      = <<-DESC
   Freshchat Flutter SDK - iOS.

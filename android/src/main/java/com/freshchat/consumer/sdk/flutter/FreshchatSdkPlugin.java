@@ -233,10 +233,12 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
             FaqOptions faqOptions = new FaqOptions();
             FaqOptions.FilterType filterType;
             filterType = FaqOptions.FilterType.ARTICLE;
-            if (faqFilterType.equals("Article")) {
-                filterType = FaqOptions.FilterType.ARTICLE;
-            } else if (faqFilterType.equals("Category")) {
-                filterType = FaqOptions.FilterType.CATEGORY;
+            if (faqFilterType != null) {
+                if (faqFilterType.equals("Article")) {
+                    filterType = FaqOptions.FilterType.ARTICLE;
+                } else if (faqFilterType.equals("Category")) {
+                    filterType = FaqOptions.FilterType.CATEGORY;
+                }
             }
             faqOptions.filterByTags(faqTags, faqTitle, filterType);
             faqOptions.showContactUsOnFaqScreens(showContactUsOnFaqScreens);

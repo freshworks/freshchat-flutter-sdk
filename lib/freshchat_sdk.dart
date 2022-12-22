@@ -221,7 +221,7 @@ class Freshchat {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.10.1-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.10.2-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
@@ -240,7 +240,12 @@ class Freshchat {
         contactUsTitle.isNullOrEmpty &&
         faqTags.isNullOrEmpty &&
         contactUsTags.isNullOrEmpty) {
-      await _channel.invokeMethod('showFAQ');
+      await _channel.invokeMethod('showFAQsWithOptions', <String, dynamic>{
+        'showContactUsOnFaqScreens': showContactUsOnFaqScreens,
+        'showFaqCategoriesAsGrid': showFaqCategoriesAsGrid,
+        'showContactUsOnAppBar': showContactUsOnAppBar,
+        'showContactUsOnFaqNotHelpful': showContactUsOnFaqNotHelpful
+      });
     } else {
       await _channel.invokeMethod(
         'showFAQsWithOptions',
