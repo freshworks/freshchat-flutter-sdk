@@ -1,7 +1,21 @@
-## 0.10.2 (22/12/2022)
+## 0.10.3 (10/03/2023)
 
 ### Feature
-* Support for Read Only and Single Select carousel for bot flow (Android)
+* This version lets you receive star rate feedback from users during bot interactions (iOS)
+
+### Bug fixes
+* Fix to initiate bot for resolved conversations when chat screen opens (Android)
+* Fix for send button being enabled when only empty spaces are entered (Android)
+* Fix for extra space being displayed below multiline bot messages (Android)
+* Fix for a crash which occurs while attaching images (Android)
+* Fix for updating user details along with user creation (iOS)
+* Fix to stop auto scrolling of Carousel cards to initial card (iOS)
+* Fix for overlapping new message indicator with reply editor (iOS)
+* Fix to allow sending attachment only when bot requests an attachment (iOS)
+* Fix for localisation of FAQ search bar cancel text (iOS)
+* Fix to stop FAQ content from shaking while scrolling with less content (iOS)
+
+## 0.10.2 (22/12/2022)
 
 ### Bug fix
 * Fix for FAQ configurations not working when no tags are provided.
