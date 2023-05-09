@@ -1,3 +1,24 @@
+## 0.10.4 (09/05/2023)
+### Feature
+* Placeholder support for bot messages
+
+### Enhancements
+* Display links configured for bot articles
+* Improve conversation fetch when user comes to chat without notification click (iOS)
+* Update invalid initialization experience with alert message (iOS)
+
+### Bug fixes
+* Fix for displaying blank topic name in topic list screen (Android)
+* Fix for multiple selection of quick reply buttons (Android)
+* Fix for HTML tags not supported in carousel title and subtitle (Android)
+* Fix for multiple selection of Dropdown options (Android)
+* Fix for bot not being triggered when user responds to CSAT (Android)
+* Fix for locale change not being reflected in topics screen (Android)
+* Fix to show bot flow message instead of unsupported format error message (iOS)
+* Fix to show HTML entities instead of entity names (iOS)
+* Fix to allow attachments in the first message while talking to an agent. (iOS)
+* Fix CFBundleSupportedPlatforms issue while submitting app to store (iOS)
+
 ## 0.10.3 (10/03/2023)
 
 ### Feature
