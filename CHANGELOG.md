@@ -1,3 +1,11 @@
+## 0.10.5 (02/06/2023)
+### Bug fixes
+* Fix for app version not updating in device properties section (iOS)
+* Fix profile image flickering for bot or agent message in chat (iOS)
+* Fix for localization with country value (iOS)
+* Fix display of CSAT title with theme color (iOS)
+* Fix spaces in multiline bot messages with paragraph tag.
+
 ## 0.10.4 (09/05/2023)
 ### Feature
 * Placeholder support for bot messages
