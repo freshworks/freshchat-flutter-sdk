@@ -1,7 +1,50 @@
-## 0.10.2 (22/12/2022)
+## 0.10.5 (02/06/2023)
+### Bug fixes
+* Fix for app version not updating in device properties section (iOS)
+* Fix profile image flickering for bot or agent message in chat (iOS)
+* Fix for localization with country value (iOS)
+* Fix display of CSAT title with theme color (iOS)
+* Fix spaces in multiline bot messages with paragraph tag.
+
+## 0.10.4 (09/05/2023)
+### Feature
+* Placeholder support for bot messages
+
+### Enhancements
+* Display links configured for bot articles
+* Improve conversation fetch when user comes to chat without notification click (iOS)
+* Update invalid initialization experience with alert message (iOS)
+
+### Bug fixes
+* Fix for displaying blank topic name in topic list screen (Android)
+* Fix for multiple selection of quick reply buttons (Android)
+* Fix for HTML tags not supported in carousel title and subtitle (Android)
+* Fix for multiple selection of Dropdown options (Android)
+* Fix for bot not being triggered when user responds to CSAT (Android)
+* Fix for locale change not being reflected in topics screen (Android)
+* Fix to show bot flow message instead of unsupported format error message (iOS)
+* Fix to show HTML entities instead of entity names (iOS)
+* Fix to allow attachments in the first message while talking to an agent. (iOS)
+* Fix CFBundleSupportedPlatforms issue while submitting app to store (iOS)
+
+## 0.10.3 (10/03/2023)
 
 ### Feature
-* Support for Read Only and Single Select carousel for bot flow (Android)
+* This version lets you receive star rate feedback from users during bot interactions (iOS)
+
+### Bug fixes
+* Fix to initiate bot for resolved conversations when chat screen opens (Android)
+* Fix for send button being enabled when only empty spaces are entered (Android)
+* Fix for extra space being displayed below multiline bot messages (Android)
+* Fix for a crash which occurs while attaching images (Android)
+* Fix for updating user details along with user creation (iOS)
+* Fix to stop auto scrolling of Carousel cards to initial card (iOS)
+* Fix for overlapping new message indicator with reply editor (iOS)
+* Fix to allow sending attachment only when bot requests an attachment (iOS)
+* Fix for localisation of FAQ search bar cancel text (iOS)
+* Fix to stop FAQ content from shaking while scrolling with less content (iOS)
+
+## 0.10.2 (22/12/2022)
 
 ### Bug fix
 * Fix for FAQ configurations not working when no tags are provided.
