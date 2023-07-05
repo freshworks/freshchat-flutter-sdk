@@ -216,12 +216,20 @@ class Freshchat {
     });
   }
 
+  /// Set bot variables and bot specific variables with Freshchat
+  static void setBotVariables(Map botVariables, Map specificVariables) async {
+    await _channel.invokeMethod('setBotVariables', <String, Map>{
+      'botVariables': botVariables,
+      'specificVariables':specificVariables
+    });
+  }
+
   /// Get the current Freshchat flutter SDK version as well as the corresponding native SDK version (Android or iOS)
   static Future<String> get getSdkVersion async {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.10.5-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.10.6-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 

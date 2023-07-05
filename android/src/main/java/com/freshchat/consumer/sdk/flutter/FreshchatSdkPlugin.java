@@ -215,6 +215,16 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }
 
+    public void setBotVariables(MethodCall call) {
+        try {
+            Map botVariablesMap = call.argument("botVariables");
+            Map specificVariablesMap = call.argument("specificVariables");
+            Freshchat.getInstance(context).setBotVariables(botVariablesMap, specificVariablesMap);
+        } catch (Exception e) {
+            Log.e(ERROR_TAG, e.toString());
+        }
+    }
+
     public String sdkVersion() {
         return com.freshchat.consumer.sdk.BuildConfig.VERSION_NAME;
     }
@@ -573,6 +583,10 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
 
                 case "setUserProperties":
                     setUserProperties(call);
+                    break;
+
+                case "setBotVariables":
+                    setBotVariables(call);
                     break;
 
                 case "getSdkVersion":

@@ -1,3 +1,18 @@
+## 0.10.6 (05/07/2023)
+### Features
+* Support for multi-select Carousel as a new input type for your customers. Customers will now be able to pick and choose multiple choices that appears as a series of options with a horizontal scroll (carousel) on the screen. The options list can also contain images in iOS.
+* Support for Phone number and OTP as a new input type for your customers. Customers will now be able to enter their phone numbers with country code to generate an OTP which is then entered by user and is accepted by the SDK to process user information.
+* You will now be able to pass custom user properties related to a user conversation from the mobile app to the bots via the SDK in Android.
+* We are adding support for multi-select as a new input type for your customers. Customers will now be able to pick and choose multiple choices that appears as list and dropdown.
+* We are adding support for Date and time as a new input type for your customers. Customers will now be able to pick a date and pick a time within the bot flow.
+* Update UI for single select button and dropdown options.
+* This version will now let you receive feedback from your customers in the form of a text. Customers will be able to type their feedback if configured in the bot flow in Android.
+* This version will now let you receive feedback from your customers in the form of a preset choices. Customers will be able to choose their feedback from a maximum 3 choices in Android.
+* This version will now let you receive feedback from your customers in the form of a star. Customers will be able to select the rating feedback if configured in the bot flow in Android.
+
+### Bug Fixes :
+* Fix for notifications not coming when an old user is restored over existing user in iOS.
+
 ## 0.10.5 (02/06/2023)
 ### Bug fixes
 * Fix for app version not updating in device properties section (iOS)

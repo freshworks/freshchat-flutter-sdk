@@ -104,6 +104,20 @@ NSNotificationCenter *center;
     }
 }
 
+-(void)setBotVariables:(FlutterMethodCall *) call{
+    @try {
+        NSDictionary* botVariables = call.arguments[@"botVariables"];
+        NSDictionary* specificVariables = call.arguments[@"specificVariables"];
+        if(botVariables.count == 0 && specificVariables.count == 0){
+            NSLog(@"Please provide valid bot variables");
+        } else {
+            [[Freshchat sharedInstance] setBotVariables:botVariables withBotSpecificVariables: specificVariables];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"Error on setBotVariables: %@ %@", exception.name, exception.reason);
+    }
+}
+
 -(void)setUser:(FlutterMethodCall *) call{
     @try {
         FreshchatUser *user = [FreshchatUser sharedInstance];
@@ -482,6 +496,8 @@ NSNotificationCenter *center;
         [instance trackEvent:call];
     }else if([@"setUserProperties" isEqualToString:call.method]){
         [instance setUserProperties:call];
+    }else if([@"setBotVariables" isEqualToString:call.method]){
+        [instance setBotVariables:call];
     }else if([@"resetUser" isEqualToString:call.method]){
         [instance resetUser];
     }else if([@"setUser" isEqualToString:call.method]){
