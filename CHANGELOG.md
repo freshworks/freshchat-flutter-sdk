@@ -1,3 +1,10 @@
+## 0.10.8 (04/09/2023)
+### Enhancement
+* Handle disabling of reply editor when bot response is pending in Android.
+
+### Bug fixes
+* Fix file attachment not opening in Android.
+
 ## 0.10.7 (08/08/2023)
 ### Features
 * Say hi to bot actions! Certain actions may need to be performed before or after the execution of a response in a bot conversation to complete the process. These changes can be anything in the chat screen, API triggers, pop-up feedbacks or articles, handover to agents, stop/Minimize conversations etc. You will be able to configure this via the bot builder using actions in iOS.
