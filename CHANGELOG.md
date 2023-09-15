@@ -1,3 +1,7 @@
+## 0.10.9 (15/09/2023)
+### Bug fixes
+* Fix for a crash that occurs during "postback" flow in a bot conversation in Android.
+
 ## 0.10.8 (04/09/2023)
 ### Enhancement
 * Handle disabling of reply editor when bot response is pending in Android.
