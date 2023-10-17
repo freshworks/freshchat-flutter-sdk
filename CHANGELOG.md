@@ -1,3 +1,10 @@
+## 0.10.9 (17/10/2023)
+### Enhancement
+* Improvements in user experience when loading messages in a conversation in Android.
+
+### Bug fixes
+* Fix for bot variables not being set for resolved conversations in Android.
+
 ## 0.10.9 (15/09/2023)
 ### Bug fixes
 * Fix for a crash that occurs during "postback" flow in a bot conversation in Android.
