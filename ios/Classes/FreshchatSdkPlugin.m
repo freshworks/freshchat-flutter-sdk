@@ -23,7 +23,6 @@ NSObject* messageCountEvent;
 NSObject* jwtRefreshEvent;
 NSObject* userInteractionEvent;
 NSNotificationCenter *center;
-
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
     channel = [FlutterMethodChannel
                methodChannelWithName:@"freshchat_sdk"
@@ -45,6 +44,7 @@ NSNotificationCenter *center;
         freshchatConfig.eventsUploadEnabled = [call.arguments[@"userEventsTrackingEnabled"]boolValue];
         freshchatConfig.errorLogsEnabled = [call.arguments[@"errorLogsEnabled"]boolValue];
         freshchatConfig.showNotificationBanner = [call.arguments[@"showNotificationBanneriOS"]boolValue];
+        freshchatConfig.fileAttachmentEnabled = [call.arguments[@"fileSelectionEnabled"]boolValue];
         NSString* stringsBundle = call.arguments[@"stringsBundle"];
         NSString* themeName = call.arguments[@"themeName"];
         if(![themeName isEqual:[NSNull null]]) {
@@ -104,6 +104,20 @@ NSNotificationCenter *center;
     }
 }
 
+-(void)setBotVariables:(FlutterMethodCall *) call{
+    @try {
+        NSDictionary* botVariables = call.arguments[@"botVariables"];
+        NSDictionary* specificVariables = call.arguments[@"specificVariables"];
+        if(botVariables.count == 0 && specificVariables.count == 0){
+            NSLog(@"Please provide valid bot variables");
+        } else {
+            [[Freshchat sharedInstance] setBotVariables:botVariables withBotSpecificVariables: specificVariables];
+        }
+    } @catch (NSException *exception) {
+        NSLog(@"Error on setBotVariables: %@ %@", exception.name, exception.reason);
+    }
+}
+
 -(void)setUser:(FlutterMethodCall *) call{
     @try {
         FreshchatUser *user = [FreshchatUser sharedInstance];
@@ -154,9 +168,9 @@ NSNotificationCenter *center;
         options.showContactUsOnFaqNotHelpful = [call.arguments[@"showContactUsOnFaqNotHelpful"]boolValue];
         NSString* filterType = call.arguments[@"faqFilterType"];
         if(![faqTagsList isEqual:[NSNull null]] && ![faqTitle isEqual:[NSNull null]]){
-            if([@"Category" isEqualToString:filterType]) {
+            if(![filterType isEqual:[NSNull null]] && [@"Category" isEqualToString:filterType]) {
                 [options filterByTags:faqTagsList withTitle:faqTitle andType: CATEGORY];
-            }else{
+            } else{
                 [options filterByTags:call.arguments[@"faqTags"] withTitle:call.arguments[@"faqTitle"] andType: ARTICLE];
             }
         }
@@ -308,7 +322,7 @@ NSNotificationCenter *center;
         if([eventName isEqual:(@"FRESHCHAT_EVENTS")]){
             [instance registerForUserActions:YES];
         }else
-        if([eventName isEqual:(@"FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED")]){
+        if([eventName isEqual:(@"FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED")]){
             [instance registerForMessageCountUpdates:YES];
         }else
         if([eventName isEqual:(@"ACTION_OPEN_LINKS")]){
@@ -334,7 +348,7 @@ NSNotificationCenter *center;
         if([eventName isEqual:(@"FRESHCHAT_EVENTS")]){
             [instance registerForUserActions:NO];
         }else
-        if([eventName isEqual:(@"FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED")]){
+        if([eventName isEqual:(@"FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED")]){
             [instance registerForMessageCountUpdates:NO];
         }else
         if([eventName isEqual:(@"ACTION_OPEN_LINKS")]){
@@ -396,7 +410,7 @@ NSNotificationCenter *center;
 {
     if (shouldRegister == YES) {
         messageCountEvent = [[NSNotificationCenter defaultCenter]addObserverForName:FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-            [channel invokeMethod:@"FRESHCHAT_UNREAD_MESSAGE_COUNT_CHANGED"
+            [channel invokeMethod:@"FRESHCHAT_ACTION_MESSAGE_COUNT_CHANGED"
                         arguments:@YES];
         }];
     }
@@ -482,6 +496,8 @@ NSNotificationCenter *center;
         [instance trackEvent:call];
     }else if([@"setUserProperties" isEqualToString:call.method]){
         [instance setUserProperties:call];
+    }else if([@"setBotVariables" isEqualToString:call.method]){
+        [instance setBotVariables:call];
     }else if([@"resetUser" isEqualToString:call.method]){
         [instance resetUser];
     }else if([@"setUser" isEqualToString:call.method]){

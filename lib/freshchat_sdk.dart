@@ -45,27 +45,21 @@ extension getPriorityValue on Priority {
     switch (this) {
       case Priority.PRIORITY_DEFAULT:
         return 0;
-        break;
 
       case Priority.PRIORITY_LOW:
         return -1;
-        break;
 
       case Priority.PRIORITY_MIN:
         return -2;
-        break;
 
       case Priority.PRIORITY_HIGH:
         return 1;
-        break;
 
       case Priority.PRIORITY_MAX:
         return 2;
-        break;
 
       default:
         return 0;
-        break;
     }
   }
 }
@@ -85,35 +79,27 @@ extension getImportanceValue on Importance {
     switch (this) {
       case Importance.IMPORTANCE_UNSPECIFIED:
         return -1000;
-        break;
 
       case Importance.IMPORTANCE_NONE:
         return 0;
-        break;
 
       case Importance.IMPORTANCE_MIN:
         return 1;
-        break;
 
       case Importance.IMPORTANCE_LOW:
         return 2;
-        break;
 
       case Importance.IMPORTANCE_DEFAULT:
         return 3;
-        break;
 
       case Importance.IMPORTANCE_HIGH:
         return 4;
-        break;
 
       case Importance.IMPORTANCE_MAX:
         return 5;
-        break;
 
       default:
         return 3;
-        break;
     }
   }
 }
@@ -154,7 +140,8 @@ class Freshchat {
       String? stringsBundle,
       String? themeName,
       bool errorLogsEnabled = true,
-      bool showNotificationBanneriOS = true}) async {
+      bool showNotificationBanneriOS = true,
+      bool fileSelectionEnabled = true}) async {
     await _channel.invokeMethod('init', <String, dynamic>{
       'appId': appId,
       'appKey': appKey,
@@ -167,7 +154,8 @@ class Freshchat {
       'stringsBundle': stringsBundle,
       'themeName': themeName,
       'errorLogsEnabled': errorLogsEnabled,
-      'showNotificationBanneriOS': showNotificationBanneriOS
+      'showNotificationBanneriOS': showNotificationBanneriOS,
+      'fileSelectionEnabled': fileSelectionEnabled
     });
   }
 
@@ -228,12 +216,20 @@ class Freshchat {
     });
   }
 
+  /// Set bot variables and bot specific variables with Freshchat
+  static void setBotVariables(Map botVariables, Map specificVariables) async {
+    await _channel.invokeMethod('setBotVariables', <String, Map>{
+      'botVariables': botVariables,
+      'specificVariables':specificVariables
+    });
+  }
+
   /// Get the current Freshchat flutter SDK version as well as the corresponding native SDK version (Android or iOS)
   static Future<String> get getSdkVersion async {
     final String sdkVersion = await _channel.invokeMethod('getSdkVersion');
     final String operatingSystem = Platform.operatingSystem;
     // As there is no simple way to get current freshchat flutter sdk version, we are hardcoding here.
-    final String allSdkVersion = "flutter-0.9.5-$operatingSystem-$sdkVersion ";
+    final String allSdkVersion = "flutter-0.10.10-$operatingSystem-$sdkVersion ";
     return allSdkVersion;
   }
 
@@ -252,13 +248,18 @@ class Freshchat {
         contactUsTitle.isNullOrEmpty &&
         faqTags.isNullOrEmpty &&
         contactUsTags.isNullOrEmpty) {
-      await _channel.invokeMethod('showFAQ');
+      await _channel.invokeMethod('showFAQsWithOptions', <String, dynamic>{
+        'showContactUsOnFaqScreens': showContactUsOnFaqScreens,
+        'showFaqCategoriesAsGrid': showFaqCategoriesAsGrid,
+        'showContactUsOnAppBar': showContactUsOnAppBar,
+        'showContactUsOnFaqNotHelpful': showContactUsOnFaqNotHelpful
+      });
     } else {
       await _channel.invokeMethod(
         'showFAQsWithOptions',
         <String, dynamic>{
-          'faqTitle': faqTitle,
-          'contactUsTitle': contactUsTitle,
+          'faqTitle': faqTitle ?? "",
+          'contactUsTitle': contactUsTitle ?? "",
           'faqTags': faqTags,
           'contactUsTags': contactUsTags,
           'faqFilterType': faqFilterType!.toShortString(),

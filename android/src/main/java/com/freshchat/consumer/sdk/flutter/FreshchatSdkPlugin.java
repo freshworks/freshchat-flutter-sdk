@@ -143,6 +143,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
             boolean cameraCaptureEnabled = call.argument("cameraCaptureEnabled");
             boolean gallerySelectionEnabled = call.argument("gallerySelectionEnabled");
             boolean userEventsTrackingEnabled = call.argument("userEventsTrackingEnabled");
+            boolean fileSelectionEnabled = call.argument("fileSelectionEnabled");
             freshchatConfig = new FreshchatConfig(appId, appKey);
             freshchatConfig.setDomain(domain);
             freshchatConfig.setResponseExpectationEnabled(responseExpectationEnabled);
@@ -150,6 +151,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
             freshchatConfig.setGallerySelectionEnabled(gallerySelectionEnabled);
             freshchatConfig.setUserEventsTrackingEnabled(userEventsTrackingEnabled);
             freshchatConfig.setCameraCaptureEnabled(cameraCaptureEnabled);
+            freshchatConfig.setFileSelectionEnabled(fileSelectionEnabled);
             Freshchat.getInstance(context).init(freshchatConfig);
         } catch (Exception e) {
             Log.e(ERROR_TAG, e.toString());
@@ -213,6 +215,16 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }
 
+    public void setBotVariables(MethodCall call) {
+        try {
+            Map botVariablesMap = call.argument("botVariables");
+            Map specificVariablesMap = call.argument("specificVariables");
+            Freshchat.getInstance(context).setBotVariables(botVariablesMap, specificVariablesMap);
+        } catch (Exception e) {
+            Log.e(ERROR_TAG, e.toString());
+        }
+    }
+
     public String sdkVersion() {
         return com.freshchat.consumer.sdk.BuildConfig.VERSION_NAME;
     }
@@ -231,10 +243,12 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
             FaqOptions faqOptions = new FaqOptions();
             FaqOptions.FilterType filterType;
             filterType = FaqOptions.FilterType.ARTICLE;
-            if (faqFilterType.equals("Article")) {
-                filterType = FaqOptions.FilterType.ARTICLE;
-            } else if (faqFilterType.equals("Category")) {
-                filterType = FaqOptions.FilterType.CATEGORY;
+            if (faqFilterType != null) {
+                if (faqFilterType.equals("Article")) {
+                    filterType = FaqOptions.FilterType.ARTICLE;
+                } else if (faqFilterType.equals("Category")) {
+                    filterType = FaqOptions.FilterType.CATEGORY;
+                }
             }
             faqOptions.filterByTags(faqTags, faqTitle, filterType);
             faqOptions.showContactUsOnFaqScreens(showContactUsOnFaqScreens);
@@ -569,6 +583,10 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
 
                 case "setUserProperties":
                     setUserProperties(call);
+                    break;
+
+                case "setBotVariables":
+                    setBotVariables(call);
                     break;
 
                 case "getSdkVersion":
