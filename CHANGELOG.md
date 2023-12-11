@@ -1,4 +1,15 @@
-## 0.10.9 (17/10/2023)
+## 0.10.11 (11/12/2023)
+### Features
+* Support for multi-select Carousel as a new input type for your customers. Customers will now be able to pick and choose multiple choices that appears as a series of options with a horizontal scroll (carousel) on the screen. The options list can also contain images in Android.
+
+### Bug fixes
+* Fix for hyper links not scrolling to the desired index in FAQ webview in omni account in Android.
+* Fix for HTML code is being displayed in carousels primary & secondary buttons in Android.
+* Fix for conversation is not loading for Android Gradle Plugin 8.0 consumers in Android.
+* UI fixes for API generated proactive reply suggestions in iOS.
+* Fix intermittent delays in updating team member information when a conversation is assigned from the bot flow in iOS
+
+## 0.10.10 (17/10/2023)
 ### Enhancement
 * Improvements in user experience when loading messages in a conversation in Android.
 
