@@ -1,3 +1,7 @@
+## 0.10.12 (10/01/2023)
+### Bug fixes
+* Fix to enable text input editor when using Freshchat Public APIs to send messages on behalf of an agent/bot in Android.
+
 ## 0.10.11 (11/12/2023)
 ### Features
 * Support for multi-select Carousel as a new input type for your customers. Customers will now be able to pick and choose multiple choices that appears as a series of options with a horizontal scroll (carousel) on the screen. The options list can also contain images in Android.
