@@ -1,3 +1,12 @@
+## 0.10.13 (23/01/2024)
+### Bug fixes
+* Addressed crashes affecting users running iOS versions prior to 13.
+* Fixed compromised visibility of the date picker view in dark mode for iOS.
+* Fixed a potential ANR during app update for Android.
+* Fix for bot not re-triggering after resolving bot conversations in Android.
+* Fix for a crash happening while loading conversations in Android.
+* Fix for agent name is not updated when any bot conversations are assigned to any agent in Android.
+
 ## 0.10.12 (10/01/2023)
 ### Bug fixes
 * Fix to enable text input editor when using Freshchat Public APIs to send messages on behalf of an agent/bot in Android.
