@@ -1,71 +1,68 @@
 PODS:
-  - Firebase/CoreOnly (8.9.0):
-    - FirebaseCore (= 8.9.0)
-  - Firebase/Messaging (8.9.0):
+  - Firebase/CoreOnly (10.20.0):
+    - FirebaseCore (= 10.20.0)
+  - Firebase/Messaging (10.20.0):
     - Firebase/CoreOnly
-    - FirebaseMessaging (~> 8.9.0)
-  - firebase_core (1.10.5):
-    - Firebase/CoreOnly (= 8.9.0)
+    - FirebaseMessaging (~> 10.20.0)
+  - firebase_core (2.25.4):
+    - Firebase/CoreOnly (= 10.20.0)
     - Flutter
-  - firebase_messaging (10.0.9):
-    - Firebase/Messaging (= 8.9.0)
+  - firebase_messaging (14.7.15):
+    - Firebase/Messaging (= 10.20.0)
     - firebase_core
     - Flutter
-  - FirebaseCore (8.9.0):
-    - FirebaseCoreDiagnostics (~> 8.0)
-    - GoogleUtilities/Environment (~> 7.6)
-    - GoogleUtilities/Logger (~> 7.6)
-  - FirebaseCoreDiagnostics (8.10.0):
-    - GoogleDataTransport (~> 9.1)
-    - GoogleUtilities/Environment (~> 7.6)
-    - GoogleUtilities/Logger (~> 7.6)
-    - nanopb (~> 2.30908.0)
-  - FirebaseInstallations (8.10.0):
-    - FirebaseCore (~> 8.0)
-    - GoogleUtilities/Environment (~> 7.6)
-    - GoogleUtilities/UserDefaults (~> 7.6)
-    - PromisesObjC (< 3.0, >= 1.2)
-  - FirebaseMessaging (8.9.0):
-    - FirebaseCore (~> 8.0)
-    - FirebaseInstallations (~> 8.0)
-    - GoogleDataTransport (~> 9.1)
-    - GoogleUtilities/AppDelegateSwizzler (~> 7.6)
-    - GoogleUtilities/Environment (~> 7.6)
-    - GoogleUtilities/Reachability (~> 7.6)
-    - GoogleUtilities/UserDefaults (~> 7.6)
-    - nanopb (~> 2.30908.0)
+  - FirebaseCore (10.20.0):
+    - FirebaseCoreInternal (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.12)
+    - GoogleUtilities/Logger (~> 7.12)
+  - FirebaseCoreInternal (10.21.0):
+    - "GoogleUtilities/NSData+zlib (~> 7.8)"
+  - FirebaseInstallations (10.21.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - PromisesObjC (~> 2.1)
+  - FirebaseMessaging (10.20.0):
+    - FirebaseCore (~> 10.0)
+    - FirebaseInstallations (~> 10.0)
+    - GoogleDataTransport (~> 9.3)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GoogleUtilities/Reachability (~> 7.8)
+    - GoogleUtilities/UserDefaults (~> 7.8)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
   - Flutter (1.0.0)
-  - freshchat_sdk (0.0.1):
+  - freshchat_sdk (0.10.13):
     - Flutter
-    - FreshchatSDK (= 5.0.3)
-  - FreshchatSDK (5.0.3)
-  - GoogleDataTransport (9.1.2):
-    - GoogleUtilities/Environment (~> 7.2)
-    - nanopb (~> 2.30908.0)
+    - FreshchatSDK (= 5.9.2)
+  - FreshchatSDK (5.9.2)
+  - GoogleDataTransport (9.3.0):
+    - GoogleUtilities/Environment (~> 7.7)
+    - nanopb (< 2.30910.0, >= 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/AppDelegateSwizzler (7.6.0):
+  - GoogleUtilities/AppDelegateSwizzler (7.12.0):
     - GoogleUtilities/Environment
     - GoogleUtilities/Logger
     - GoogleUtilities/Network
-  - GoogleUtilities/Environment (7.6.0):
+  - GoogleUtilities/Environment (7.12.0):
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleUtilities/Logger (7.6.0):
+  - GoogleUtilities/Logger (7.12.0):
     - GoogleUtilities/Environment
-  - GoogleUtilities/Network (7.6.0):
+  - GoogleUtilities/Network (7.12.0):
     - GoogleUtilities/Logger
     - "GoogleUtilities/NSData+zlib"
     - GoogleUtilities/Reachability
-  - "GoogleUtilities/NSData+zlib (7.6.0)"
-  - GoogleUtilities/Reachability (7.6.0):
+  - "GoogleUtilities/NSData+zlib (7.12.0)"
+  - GoogleUtilities/Reachability (7.12.0):
     - GoogleUtilities/Logger
-  - GoogleUtilities/UserDefaults (7.6.0):
+  - GoogleUtilities/UserDefaults (7.12.0):
     - GoogleUtilities/Logger
-  - nanopb (2.30908.0):
-    - nanopb/decode (= 2.30908.0)
-    - nanopb/encode (= 2.30908.0)
-  - nanopb/decode (2.30908.0)
-  - nanopb/encode (2.30908.0)
-  - PromisesObjC (2.0.0)
+  - nanopb (2.30909.1):
+    - nanopb/decode (= 2.30909.1)
+    - nanopb/encode (= 2.30909.1)
+  - nanopb/decode (2.30909.1)
+  - nanopb/encode (2.30909.1)
+  - PromisesObjC (2.3.1)
 
 DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -77,7 +74,7 @@ SPEC REPOS:
   trunk:
     - Firebase
     - FirebaseCore
-    - FirebaseCoreDiagnostics
+    - FirebaseCoreInternal
     - FirebaseInstallations
     - FirebaseMessaging
     - FreshchatSDK
@@ -97,21 +94,21 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/freshchat_sdk/ios"
 
 SPEC CHECKSUMS:
-  Firebase: 13d8d96499e2635428d5bf0ec675df21f95d9a95
-  firebase_core: dfcae4c150a5e24436a0b7677c470478a234d5bf
-  firebase_messaging: 1109f5449638254c47fb5904d24e11a4d7736c77
-  FirebaseCore: 599ee609343eaf4941bd188f85e3aa077ffe325b
-  FirebaseCoreDiagnostics: 56fb7216d87e0e6ec2feddefa9d8a392fe8b2c18
-  FirebaseInstallations: 830327b45345ffc859eaa9c17bcd5ae893fd5425
-  FirebaseMessaging: 82c4a48638f53f7b184f3cc9f6cd2cbe533ab316
-  Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
-  freshchat_sdk: 46fc5f1bfb070b80949df4b99deac2bbfe9aca57
-  FreshchatSDK: 3971dd915718c97d2c5305d751ad5262db47e261
-  GoogleDataTransport: 629c20a4d363167143f30ea78320d5a7eb8bd940
-  GoogleUtilities: 684ee790a24f73ebb2d1d966e9711c203f2a4237
-  nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
-  PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  Firebase: 10c8cb12fb7ad2ae0c09ffc86cd9c1ab392a0031
+  firebase_core: a46c312d8bae4defa3d009b2aa7b5b413aeb394e
+  firebase_messaging: 40d7dd2f3e88a6367c7326cf601f84633d477582
+  FirebaseCore: 28045c1560a2600d284b9c45a904fe322dc890b6
+  FirebaseCoreInternal: 43c1788eaeee9d1b97caaa751af567ce11010d00
+  FirebaseInstallations: 390ea1d10a4d02b20c965cbfd527ee9b3b412acb
+  FirebaseMessaging: 06c414a21b122396a26847c523d5c370f8325df5
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  freshchat_sdk: a7b7a64fb94fb22088535adc57db205166f5e7ab
+  FreshchatSDK: 6355b8d8ca8f10efb231e7ce54db3d8b0580ce9c
+  GoogleDataTransport: 57c22343ab29bc686febbf7cbb13bad167c2d8fe
+  GoogleUtilities: 0759d1a57ebb953965c2dfe0ba4c82e95ccc2e34
+  nanopb: d4d75c12cd1316f4a64e3c6963f879ecd4b5e0d5
+  PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
 
-PODFILE CHECKSUM: 02d221f1e7d9462bff20092f7b45d080159f4852
+PODFILE CHECKSUM: b509af10e4eff1565a7ba4e0e5df7dd2b5f29549
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.15.2
