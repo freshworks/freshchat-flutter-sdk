@@ -1,11 +1,14 @@
-## 0.10.13 (23/01/2024)
+## 0.10.13 (14/02/2024)
 ### Bug fixes
-* Addressed crashes affecting users running iOS versions prior to 13.
-* Fixed compromised visibility of the date picker view in dark mode for iOS.
-* Fixed a potential ANR during app update for Android.
+* Fix for potential ANR during app update in Android.
 * Fix for bot not re-triggering after resolving bot conversations in Android.
 * Fix for a crash happening while loading conversations in Android.
 * Fix for agent name is not updated when any bot conversations are assigned to any agent in Android.
+* Fix for Agent first name display issue when bot conversations are assigned to an agent.
+* Addressed crashes affecting users running iOS versions prior to 13.
+* Fixed compromised visibility of the date picker view in dark mode in iOS.
+* Fix display of team member information in chat messages.
+* Fix infinite loading issue for users with expired JWT authentication.
 
 ## 0.10.12 (10/01/2023)
 ### Bug fixes
