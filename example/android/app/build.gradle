@@ -26,6 +26,8 @@ apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
+    namespace "om.fc.sampleobjc.flutter_app"
+
     compileSdkVersion 28
 
     lintOptions {
