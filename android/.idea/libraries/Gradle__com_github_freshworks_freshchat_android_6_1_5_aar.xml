@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.freshworks:freshchat-android:6.1.5@aar" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9051c6ebf7139fd75bf60fc2f94fccec/transformed/jetified-freshchat-android-6.1.5/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9051c6ebf7139fd75bf60fc2f94fccec/transformed/jetified-freshchat-android-6.1.5/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/9051c6ebf7139fd75bf60fc2f94fccec/transformed/jetified-freshchat-android-6.1.5/jars/libs/freshchat.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/9051c6ebf7139fd75bf60fc2f94fccec/transformed/jetified-freshchat-android-6.1.5/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

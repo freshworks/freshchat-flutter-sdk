@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/freshchat_sdk.iml" filepath="$PROJECT_DIR$/.idea/modules/freshchat_sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/freshchat_sdk.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/freshchat_sdk.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/freshchat_sdk.main.iml" filepath="$PROJECT_DIR$/.idea/modules/freshchat_sdk.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/freshchat_sdk.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/freshchat_sdk.unitTest.iml" />
     </modules>
   </component>
 </project>
