@@ -4,7 +4,12 @@ gradle-wrapper.jar
 /gradlew
 /gradlew.bat
 /local.properties
+/.idea
 GeneratedPluginRegistrant.java
+local.properties
+
+# Use your own google-services file to run the demo app.
+google-services.json
 
 # Remember to never publicly share your keystore.
 # See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
