@@ -69,7 +69,12 @@ class _MyAppState extends State<MyApp> {
       restoreId = "",
       jwtTokenStatus = "",
       obtainedRestoreId = "",
-      sdkVersion = "";
+      sdkVersion = "",
+      parallelConversationReferenceID1 = "",
+      parallelConversationTopicName1 = "",
+      parallelConversationReferenceID2 = "",
+      parallelConversationTopicName2 = "";
+
   Map eventProperties = {}, unreadCountStatus = {};
   List<String> properties = [], topicTagsList = [];
   late FreshchatUser user;
@@ -189,6 +194,81 @@ class _MyAppState extends State<MyApp> {
 
   void faqSearchTags(BuildContext context) {
     showDialog(context: context, builder: (context) => FaqTagAlert());
+  }
+
+  void getParallelConversationData(BuildContext context) {
+    var alert = AlertDialog(
+      scrollable: true,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+      title: Text(
+        "Parallel conversation data:",
+        textDirection: TextDirection.ltr,
+        style: TextStyle(fontFamily: 'OpenSans-Regular'),
+      ),
+      content: Form(
+        key: _userInfoKey,
+        child: Column(
+          children: [
+            TextFormField(
+                decoration: InputDecoration(labelText: "Reference ID 1"),
+                initialValue: parallelConversationReferenceID1,
+                onChanged: (val) {
+                  setState(() {
+                    parallelConversationReferenceID1 = val;
+                  });
+                }),
+            TextFormField(
+                decoration: InputDecoration(labelText: "Topic name 1"),
+                initialValue: parallelConversationTopicName1,
+                onChanged: (val) {
+                  setState(() {
+                    parallelConversationTopicName1 = val;
+                  });
+                }),
+            TextFormField(
+                decoration: InputDecoration(labelText: "Reference ID 2"),
+                initialValue: parallelConversationReferenceID2,
+                onChanged: (val) {
+                  setState(() {
+                    parallelConversationReferenceID2 = val;
+                  });
+                }),
+            TextFormField(
+                decoration: InputDecoration(labelText: "Topic name 2"),
+                initialValue: parallelConversationTopicName2,
+                onChanged: (val) {
+                  setState(() {
+                    parallelConversationTopicName2 = val;
+                  });
+                }),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            MaterialButton(
+              elevation: 10.0,
+              child: Text(
+                "DONE",
+                textDirection: TextDirection.ltr,
+              ),
+              onPressed: () {
+                setState(() {
+                  Navigator.of(context, rootNavigator: true).pop(context);
+                });
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+    showDialog(
+        context: context,
+        builder: (context) {
+          return alert;
+        });
   }
 
   void getUserInfo(BuildContext context) {
@@ -460,20 +540,17 @@ class _MyAppState extends State<MyApp> {
 
   Column addFeature(String name, IconData icon) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: EdgeInsets.only(top: 20.0),
-        ),
         Icon(
           icon,
           color: Colors.lightBlueAccent,
-          size: 35,
+          size: 30,
         ),
-        Padding(
-          padding: EdgeInsets.only(top: 10.0),
-        ),
+        Padding(padding: EdgeInsets.only(top: 10)),
         Text(
           '$name',
+          textAlign: TextAlign.center,
         ),
       ],
     );
@@ -552,7 +629,6 @@ class _MyAppState extends State<MyApp> {
                         content: Text("JWT Token Status: $jwtTokenStatus"),
                       );
                       ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      // Scaffold.of(context).showSnackBar(snackBar);
                     },
                   );
                 },
@@ -724,7 +800,6 @@ class _MyAppState extends State<MyApp> {
                       content: Text("Copied Restore ID: $obtainedRestoreId"),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    // Scaffold.of(context).showSnackBar(snackBar);
                   },
                 );
               },
@@ -852,6 +927,9 @@ class _MyAppState extends State<MyApp> {
     features.add(addFeature("Restore User", Icons.restore));
     features.add(addFeature("Stop Listeners", Icons.cancel));
     features.add(addFeature("Bot Variables", Icons.add_circle));
+    features.add(addFeature("Update Parallel Conversation Data", Icons.info));
+    features.add(addFeature("Show Parallel Conversation 1", Icons.chat));
+    features.add(addFeature("Show Parallel Conversation 2", Icons.chat));
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -862,6 +940,8 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Builder(
           builder: (context) => GridView.count(
+            padding: const EdgeInsets.only(left: 4, right: 4, bottom: 120),
+            shrinkWrap: true,
             crossAxisCount: 3,
             children: List.generate(features.length, (index) {
               return GestureDetector(
@@ -882,7 +962,6 @@ class _MyAppState extends State<MyApp> {
                           content: Text("User Alias: $freshchatUserId"),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        // Scaffold.of(context).showSnackBar(snackBar);
                       });
                       break;
                     case 3:
@@ -907,7 +986,6 @@ class _MyAppState extends State<MyApp> {
                           content: Text("SDK Version: $sdkVersion"),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        // Scaffold.of(context).showSnackBar(snackBar);
                       });
                       break;
                     case 7:
@@ -930,7 +1008,6 @@ class _MyAppState extends State<MyApp> {
                               "Unread Message Count: $count  Status: $status"),
                         );
                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        // Scaffold.of(context).showSnackBar(snackBar);
                       });
                       break;
                     case 10:
@@ -966,14 +1043,33 @@ class _MyAppState extends State<MyApp> {
                       Freshchat.setBotVariables(
                           botVariables, specificVariables);
                       break;
+                    case 15:
+                      getParallelConversationData(context);
+                      break;
+                    case 16:
+                      if (parallelConversationReferenceID1.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: new Text("Conversation Reference ID 1 is empty.")));
+                      } else {
+                        Freshchat.showConversationWithReferenceID(parallelConversationReferenceID1, parallelConversationTopicName1);
+                      }
+                      break;
+                    case 17:
+                      if (parallelConversationReferenceID2.isEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(new SnackBar(content: new Text("Conversation Reference ID 2 is empty.")));
+                      } else {
+                        Freshchat.showConversationWithReferenceID(parallelConversationReferenceID2, parallelConversationTopicName2);
+                      }
+                      break;
                   }
                 },
                 child: GridTile(
                   child: Container(
+                    margin: EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       border: Border.all(
                         width: 1,
                       ),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: features[index],
                   ),

@@ -322,6 +322,16 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         }
     }
 
+    public void showConversationWithReferenceID(MethodCall call) {
+        try {
+            String conversationReferenceID = call.argument("conversationReferenceID");
+            String topicName = call.argument("topicName");
+            Freshchat.showConversations(context, conversationReferenceID, topicName);
+        } catch (Exception e) {
+            Log.e(ERROR_TAG, e.toString());
+        }
+    }
+
     public void setUserWithIdToken(MethodCall call) {
         try {
             String token = call.argument("token");
@@ -429,12 +439,14 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
                 } else {
                     unregisterBroadcastReceiver(notificationClickReceiver);
                 }
+                break;
             case FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES:
                 if (shouldRegister){
                     registerBroadcastReceiver(jwtRefreshEventReceiver, Freshchat.FRESHCHAT_SET_TOKEN_TO_REFRESH_DEVICE_PROPERTIES);
                 } else {
                     unregisterBroadcastReceiver(jwtRefreshEventReceiver);
                 }
+                break;
             case ACTION_OPEN_LINKS:
                 registerForOpeningLink(shouldRegister);
                 break;
@@ -615,6 +627,10 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
 
                 case "showConversationsWithOptions":
                     showConversationsWithOptions(call);
+                    break;
+
+                case "showConversationWithReferenceID":
+                    showConversationWithReferenceID(call);
                     break;
 
                 case "setUserWithIdToken":

@@ -1,3 +1,21 @@
+## 0.10.14 (06/05/2024)
+### Features
+* Added support for Parallel conversations.
+
+### Enhancement
+* Updated the minimum supported iOS version to 12.
+* We have integrated Apple’s Required Reason API, ensuring compliance with App Store guidelines.
+* Added code signing for the SDK to enhance security and mitigate potential risks associated with unverified code.
+
+### Bug fixes
+* Fix crash in JWT user restore caused by the use of numbers for user referenceID values in iOS.
+* Fix incorrect token status when expired tokens were added during the user restoration process for JWT users in iOS.
+* Eliminated deprecated code warnings and deprecated code for serialization/deserialization of data in iOS.
+* Fix intermittent issue related to user creation occurring without user properties in iOS.
+* Fix for the unable to load topic list page due Canvas: trying to draw too large bitmap issue in Android.
+* Fix for the issue in navigating to sections in FAQs page in Android.
+* Fix for the click on search from virtual keyboard and virtual keyboard is not closing in the FAQs page in Android.
+
 ## 0.10.13 (14/02/2024)
 ### Bug fixes
 * Fix for potential ANR during app update in Android.
