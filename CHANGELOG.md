@@ -1,3 +1,10 @@
+## 0.10.15 (21/05/2024)
+### Enhancement
+* Added support for the Middle East data center in iOS.
+
+### Bug fixes
+* Fix to block users from messaging in disabled private topics when opened using tags in iOS.
+
 ## 0.10.14 (06/05/2024)
 ### Features
 * Added support for Parallel conversations.
