@@ -32,7 +32,7 @@ PODS:
     - GoogleUtilities/UserDefaults (~> 7.8)
     - nanopb (< 2.30911.0, >= 2.30908.0)
   - Flutter (1.0.0)
-  - freshchat_sdk (0.10.15):
+  - freshchat_sdk (0.10.16):
     - Flutter
     - FreshchatSDK (= 6.2.0)
   - FreshchatSDK (6.2.0)
@@ -110,7 +110,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 91950fe859846fff0fbd296180909dd273103b09
   FirebaseMessaging: 4d52717dd820707cc4eadec5eb981b4832ec8d5d
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  freshchat_sdk: 632af6571abef55f892d35171d483a145d86e0b5
+  freshchat_sdk: ab279bcf42c4e89b3bd3dbe3a5fef6935893e1a9
   FreshchatSDK: 9b4f3158fe49ddacc053d142208fc2637fd469ff
   GoogleDataTransport: 6c09b596d841063d76d4288cc2d2f42cc36e1e2a
   GoogleUtilities: ea963c370a38a8069cc5f7ba4ca849a60b6d7d15

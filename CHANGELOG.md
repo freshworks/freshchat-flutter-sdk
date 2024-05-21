@@ -1,3 +1,17 @@
+## 0.10.16 (21/05/2024)
+### Enhancement
+* Added support for the Middle East data center in iOS.
+
+### Bug fixes
+* Fix reply editor missing for optional text replies with third-party bot quick selection option message in iOS.
+* Fix for articles search with Group or Category filtering in Freshdesk knowledge base in iOS.
+* Fix handling of anchor links for FAQ articles in iOS.
+* Fix branding view overlapping with the home slider button on iPad devices in iOS.
+* Fix for missing device models to track user devices in iOS.
+* Fix for bot variables not updating since release 0.10.14 in iOS.
+* Fix for missing assets when using an old theme customization file in iOS.
+* Fix to block users from messaging in disabled private topics when opened using tags in iOS.
+
 ## 0.10.15 (21/05/2024)
 ### Enhancement
 * Added support for the Middle East data center in iOS.
