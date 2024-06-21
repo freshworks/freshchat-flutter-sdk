@@ -4,7 +4,7 @@
 
 ### Bug fixes
 * Fix for the faq search based on the tag filter by category or article in Android.
-* Fix for the Crash on updating to SDK v6.2.0(or above) from v5.9.6 (or below) in Android.
+* Fix for the Crash on updating to SDK v0.10.14(or above) from v0.10.10 (or below) in Android.
 * Fix for Search results not filtered by tags in Android.
 * Fix for links in Description are not redirected to the respected page in Android.
 * Fix for HTML tags not allowing the hyperlinks to redirect to a web-page displayed on carousels in Android.
