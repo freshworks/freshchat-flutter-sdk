@@ -1,3 +1,20 @@
+## 0.10.17 (21/06/2024)
+### Enhancement
+* Upgraded min SDK to 21 in Android.
+
+### Bug fixes
+* Fix for the faq search based on the tag filter by category or article in Android.
+* Fix for the Crash on updating to SDK v6.2.0(or above) from v5.9.6 (or below) in Android.
+* Fix for Search results not filtered by tags in Android.
+* Fix for links in Description are not redirected to the respected page in Android.
+* Fix for HTML tags not allowing the hyperlinks to redirect to a web-page displayed on carousels in Android.
+* Fix for OTP SMS not received for given mobile number while initiating the OTP from the Android SDK in Android.
+* Fix for Faq not opening with correct filter tags on initialisation time in Android.
+* Fix for Issues with bullet points displaying in Mobile SDK in Android.
+* Fix to prevent the bot from looping when the device time is incorrect in Android.
+* Fix occasional crashes in the setUser and identifyUser APIs in iOS.
+* Fix crash in the JWT restore API when using invalid tokens in iOS.
+
 ## 0.10.16 (21/05/2024)
 ### Enhancement
 * Added support for the Middle East data center in iOS.
@@ -49,7 +66,7 @@
 * Fix display of team member information in chat messages.
 * Fix infinite loading issue for users with expired JWT authentication.
 
-## 0.10.12 (10/01/2023)
+## 0.10.12 (10/01/2024)
 ### Bug fixes
 * Fix to enable text input editor when using Freshchat Public APIs to send messages on behalf of an agent/bot in Android.
 
