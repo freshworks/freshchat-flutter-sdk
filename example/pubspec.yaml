@@ -11,8 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_messaging: ^14.6.4
-  firebase_core: ^2.14.0
+  firebase_messaging: ^15.0.4
+  firebase_core: ^3.3.0
 
   freshchat_sdk:
     # When depending on this package from a real application you should use:

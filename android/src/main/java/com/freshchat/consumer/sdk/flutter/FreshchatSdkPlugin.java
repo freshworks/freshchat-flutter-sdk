@@ -226,7 +226,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     public String sdkVersion() {
-        return com.freshchat.consumer.sdk.BuildConfig.VERSION_NAME;
+        return "6.2.8";
     }
 
     public void showFAQsWithOptions(MethodCall call) {
