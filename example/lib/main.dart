@@ -100,7 +100,7 @@ class _MyAppState extends State<MyApp> {
     Freshchat.init(APPID, APPKEY, DOMAIN);
     Freshchat.linkifyWithPattern("google", "https://google.com");
     Freshchat.setNotificationConfig(
-      notificationInterceptionEnabled: true,
+      notificationInterceptionEnabled: false,
       largeIcon: "large_icon",
       smallIcon: "small_icon",
     );

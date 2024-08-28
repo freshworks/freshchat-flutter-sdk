@@ -226,7 +226,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
     }
 
     public String sdkVersion() {
-        return "6.2.8";
+        return Freshchat.getSDKVersionName();
     }
 
     public void showFAQsWithOptions(MethodCall call) {
@@ -518,7 +518,12 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         try {
             Map pushPayload = call.argument("pushPayload");
             Bundle pushPayloadBundle = jsonToBundle(pushPayload);
-            Freshchat.handleFcmMessage(context, pushPayloadBundle);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Freshchat.handleFcmMessage(context, pushPayloadBundle);
+                }
+            }).start();
         } catch (Exception e) {
             Log.e(ERROR_TAG, e.toString());
         }

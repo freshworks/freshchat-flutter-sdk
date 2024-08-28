@@ -4,20 +4,20 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'freshchat_sdk'
-  s.version          = '0.10.19'
+  s.version          = '0.10.20'
   s.summary          = 'Freshchat Flutter SDK - iOS'
   s.description      = <<-DESC
   Freshchat Flutter SDK - iOS.
                        DESC
   s.homepage         = 'http://freshworks.com'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Freshworks' => 'rohit.ramkumar@freshworks.com' }
+  s.author           = { 'Freshworks' => 'support@freshchat.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
   s.platform = :ios
-  s.dependency "FreshchatSDK", '6.2.3'
+  s.dependency "FreshchatSDK", '6.2.5'
 
   # Flutter.framework does not contain a i386 slice. Only x86_64 simulators are supported.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'VALID_ARCHS[sdk=iphonesimulator*]' => 'x86_64' }
