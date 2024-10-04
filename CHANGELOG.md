@@ -1,3 +1,28 @@
+## 0.10.21 (04/10/2024)
+### Features
+* Added new SDK public API to dismiss FreshchatSDK screen if currently visible.
+### Bug Fixes
+* Fixed an issue where links without descriptions were not working in the Bot Article flow in Android.
+* Fixed an issue where quick actions were not hidden immediately after a conversation was resolved in Android.
+* Fixed an issue where anonymous implementations of FreshchatWebListener were getting garbage collected after a locale change in Android.
+* Fixed an issue where the country code was not retained in the view in Android.
+* Fixed an issue where images captured with the camera were rotated 90 degrees to the left on some devices in Android.
+* Fixed an issue where the file name preview was not consistent for images taken via the camera in Android.
+* Fixed an issue with hyperlink breakage in Android.
+* Fix for notification not working in iOS 18 sandbox environment.
+* Fix occasional issues with the reply editor display in the dropdown, carousel and option selections in iOS.
+* Fix for quick option selection menu buttons are not hidden after a conversation is resolved in iOS.
+* Fix for bot articles flow where links without descriptions are not working in iOS.
+* Fix rare crash during resetUser API call in iOS.
+* Fix the image with text alignment issue in conversation message in iOS.
+* Fix the issue where the “Was this answer helpful?” feedback options (Yes/No) were not displaying at the bottom of the article in iOS.
+* Fix where we removed the 256-character limit for setting up the user properties in iOS.
+* Fix added support for this year’s new devices in iOS.
+* Fix the issue where the reply editor was visible when sending a carousel via the public API. Now, the reply editor will not appear for carousels sent through the public API in iOS.
+* Fix an issue where the “Select All” button was not displayed in the multi-select carousel in some edge cases in iOS.
+### Enhancement
+* Removed the character count limitation for setting user properties
+
 ## 0.10.20 (28/08/2024)
 ### Bug fixes
 * Fixed orientations of quick reply option for RTL users in iOS.
