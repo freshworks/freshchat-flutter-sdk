@@ -491,6 +491,9 @@ NSNotificationCenter *center;
     [[Freshchat sharedInstance] openFreshchatDeeplink:link viewController:visibleVC];
 }
 
+-(void)dismissFreshchatView{
+    [[Freshchat sharedInstance] dismissFreshchatViews];
+}
 
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
     if ([@"getSdkVersion" isEqualToString:call.method]) {
@@ -555,6 +558,8 @@ NSNotificationCenter *center;
         NSLog(@"Linkify not available for iOS");
     }else if([@"notifyAppLocaleChange" isEqualToString:call.method]){
         NSLog(@"notifyAppLocaleChange not available for iOS");
+    } else if([@"dismissFreshchatView" isEqualToString:call.method]){
+        [instance dismissFreshchatView];
     }
     else{
         result(FlutterMethodNotImplemented);
