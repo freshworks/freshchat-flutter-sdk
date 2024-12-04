@@ -1,3 +1,15 @@
+## 0.10.22 (04/12/2024)
+### Features
+* Exposed an FCEventAgentProfileClick event to retrieve agent details upon clicking the agent profile in Android and iOS.
+* Added a public API to set and get the agent profile click redirection URI in Android.
+### Bug Fixes
+* Fixed an issue where an extra space appeared in the carousel card of user messages in Android.
+* Fixed an issue with carousel card selection in specific scenarios in Android.
+* Fixed an issue where the chat failed to scroll to the latest message after multiple carousel items were selected in Android.
+* Fixed an issue where the image caption was not removed after sending an image message in Android.
+* Fix UI issue where bot nodes configured after feedback bot message were not displayed properly in iOS.
+* Fix crash related to footer view when using multiselect buttons and dropdowns on apps built with Xcode 16 for iOS 18 users in iOS.
+
 ## 0.10.21 (04/10/2024)
 ### Features
 * Added new SDK public API to dismiss FreshchatSDK screen if currently visible.
