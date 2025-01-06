@@ -3,7 +3,7 @@ description: Freshchat is a modern messaging software for sales and customer eng
 repository: https://github.com/freshworks/freshchat-flutter-sdk
 
 # Whenever this version is updated, it must also be updated in Freshchat::getSdkVersion()
-version: 0.10.22
+version: 0.10.23
 homepage: https://www.freshworks.com/
 
 environment:

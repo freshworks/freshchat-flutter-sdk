@@ -1,3 +1,11 @@
+## 0.10.23 (06/01/2025)
+### Bug Fixes
+* Fixed an issue where the chat screen is not scrolling if carousel is present in the screen in Android.
+* Fixed UI issue where extra space was added to carousel card with HTML content in iOS.
+
+### Enhancement
+* Gradle 8.0 support in Android.
+
 ## 0.10.22 (04/12/2024)
 ### Features
 * Exposed an FCEventAgentProfileClick event to retrieve agent details upon clicking the agent profile in Android and iOS.
