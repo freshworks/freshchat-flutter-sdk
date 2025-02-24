@@ -20,7 +20,6 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 
 import com.freshchat.consumer.sdk.ConversationOptions;
@@ -79,20 +78,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
                 this);
     }
 
-    public static void register(@NonNull PluginRegistry registry) {
-        if (registry == null) {
-            return;
-        }
 
-        registerWith(registry.registrarFor(PLUGIN_KEY));
-    }
-
-    // Keeping this public so it cane be used if needed
-    public static void registerWith(Registrar registrar) {
-        setupPlugin(registrar.context().getApplicationContext(),
-                registrar.messenger(),
-                new FreshchatSdkPlugin());
-    }
 
     public static void setupPlugin(@NonNull Context context,
                                    @NonNull BinaryMessenger messenger,
@@ -566,7 +552,7 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
     public void dismissFreshchatView() {
         Intent dismissIntent = new Intent("com.freshchat.consumer.sdk.actions.DismissFreshchatScreens");
 		LocalBroadcastManager.getInstance(context).sendBroadcast(dismissIntent);
-    } 
+    }
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
