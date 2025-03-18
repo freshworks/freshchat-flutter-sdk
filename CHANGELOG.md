@@ -1,4 +1,28 @@
-## 0.10.23 (06/01/2025)
+## 0.10.24 (18/03/2025)
+### Bug Fixes
+* Fixed an issue where the vote button was not displayed on the FAQ screen for non-scrollable pages in Android.
+* Fixed an issue where the UI did not respect system insets in Android 15.
+* Fixed an issue where the infinite loader appeared when the bot feedback button was accidentally clicked multiple times on the Conversation Detail Screen in Android.
+* Fixed an crash during scrolling on the Conversation Detail Screen in Android.
+* Fixed an issue where the chat auto-scrolled when carousels were visible in Android.
+* Fixed a memory leak in ConversationDetailActivity in Android.
+* Fixed an issue with edge-to-edge displays on devices with Android 15.
+* Config session variables updated on remote config API calls during account switching in iOS.
+* Fix an issue ensuring message content is in the correct order in iOS.
+* Fix UI issue when feedback bot message was the last node in iOS.
+* Reduced SPM installation dependency size in iOS.
+* Fix an alignment issue with HTML list content in messages in iOS
+* Fixed an issue where the unread message count was not updating instantly when opening the app in iOS.
+* Fixed an issue where pending messages were not fetched when reopening the chat after a period of time in iOS.
+* Fixed an issue where welcome messages for custom bots were not displayed on the topic list screen in iOS.
+* Fixed an isolated issue where the bot would trigger unexpectedly in the middle of a chat in iOS.
+* Added a missing property option for the FCEventButtonSent event sent from the SDK in iOS.
+
+### Enhancement
+* Added support for flutter sdk 3.29.0
+* Upgraded targetSDKVersion to 35 in Android.
+
+* ## 0.10.23 (06/01/2025)
 ### Bug Fixes
 * Fixed an issue where the chat screen is not scrolling if carousel is present in the screen in Android.
 * Fixed UI issue where extra space was added to carousel card with HTML content in iOS.
