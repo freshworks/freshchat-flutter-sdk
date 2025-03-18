@@ -19,9 +19,6 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
-
 
 import com.freshchat.consumer.sdk.ConversationOptions;
 import com.freshchat.consumer.sdk.Event;
@@ -77,21 +74,6 @@ public class FreshchatSdkPlugin implements FlutterPlugin, MethodCallHandler {
         setupPlugin(flutterPluginBinding.getApplicationContext(),
                 flutterPluginBinding.getBinaryMessenger(),
                 this);
-    }
-
-    public static void register(@NonNull PluginRegistry registry) {
-        if (registry == null) {
-            return;
-        }
-
-        registerWith(registry.registrarFor(PLUGIN_KEY));
-    }
-
-    // Keeping this public so it cane be used if needed
-    public static void registerWith(Registrar registrar) {
-        setupPlugin(registrar.context().getApplicationContext(),
-                registrar.messenger(),
-                new FreshchatSdkPlugin());
     }
 
     public static void setupPlugin(@NonNull Context context,
