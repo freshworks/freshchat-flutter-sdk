@@ -1,3 +1,7 @@
+## 0.10.25 (20/03/2025)
+### Bug Fixes
+* Fixed an issue with incorrect chat status that may cause the bot to restart during a chat in iOS.
+
 ## 0.10.24 (18/03/2025)
 ### Bug Fixes
 * Fixed an issue where the vote button was not displayed on the FAQ screen for non-scrollable pages in Android.
@@ -22,7 +26,7 @@
 * Added support for flutter sdk 3.29.0
 * Upgraded targetSDKVersion to 35 in Android.
 
-* ## 0.10.23 (06/01/2025)
+## 0.10.23 (06/01/2025)
 ### Bug Fixes
 * Fixed an issue where the chat screen is not scrolling if carousel is present in the screen in Android.
 * Fixed UI issue where extra space was added to carousel card with HTML content in iOS.
